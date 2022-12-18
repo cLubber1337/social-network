@@ -1,11 +1,10 @@
 .header {
     background-color: #046380;
     grid-area: h;
-    box-shadow: 0 2px 15px rgb(4,99,128);
     border-bottom: 2px solid rgba(255, 255, 255, .09);
 
 }
 .logo {
-    padding-top: 5px;
-    margin-left: 205px;
+    padding-top: 10px;
+    margin-left: 210px;
 }
