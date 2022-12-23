@@ -5,7 +5,7 @@
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(6px);
     margin-right: 5px;
-    font-size:18px;
+    font-size: 18px;
     border-right: 2px solid rgba(255, 255, 255, .09);
     text-align: center;
     padding-top: 10px;
@@ -26,11 +26,13 @@
     transition: .4s;
     text-decoration: none
 }
+
 .item:hover {
     background-color: rgba(255, 255, 255, .2);
 }
-.active .item  {
-    font-weight:bold;
+
+.active .item {
+    font-weight: bold;
     transition: all 0.3s;
     opacity: 1;
     transform: scale(1, 1);
@@ -46,4 +48,23 @@
     pointer-events: none;
 }
 
+hr {
+    width: 80%;
+    height: 2px;
+    border-radius: 3px;
+    background: rgb(4, 99, 128, 0.1);
+}
 
+.sidebar {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 30px;
+
+}
+
+.photo {
+    width: 60px;
+    border-radius: 50%;
+    border: solid rgb(4, 99, 128, 0.5)
+}

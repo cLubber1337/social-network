@@ -1,18 +1,18 @@
 import React from 'react';
 import s from "./Message.module.css"
 
-type MessagePropsType = {
-    messagesData: messagesData[]
+type PropsType = {
+    messages: MessagesDataType[]
 }
-type messagesData = {
+type MessagesDataType = {
     id: number,
     message: string
 }
 
-export const Message = (props:MessagePropsType) => {
+export const Message = (props:PropsType) => {
     return (
         <div className={s.allMessages}>
-            {props.messagesData.map(m =>(
+            {props.messages.map(m =>(
                 <div className={s.message} key={m.id}>
                     {m.message}
                 </div>))}

@@ -16,7 +16,7 @@
 .photo {
     width: 60px;
     border-radius: 50%;
-    border: solid #046380;
+    border: solid rgb(4, 99, 128, 0.5)
 }
 .text {
     display: flex;

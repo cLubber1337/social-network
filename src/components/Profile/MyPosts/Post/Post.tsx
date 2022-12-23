@@ -1,17 +1,22 @@
 import React from 'react';
 import s from "./Post.module.css"
-import {postsType} from "../../../../index";
 
-type postType = { postsData: postsType[] }
-
-
-export const Post = (props: postType) => {
+type PropsType = {
+    posts: PostsType[]
+}
+type PostsType = {
+    id: number,
+    text: string,
+    photo: string,
+    like: number
+}
+export const Post = (props: PropsType) => {
     return (
         <div className={s.content}>
-            {props.postsData.map(m => (
+            {props.posts.map(m => (
                 <div className={s.post} key={m.id}>
                     <div className={s.photoText}>
-                        <img className={s.photo} src={m.photo}/>
+                        <img className={s.photo} src={m.photo} alt={"userName"}/>
                         <div className={s.text}>
                             {m.text}
                         </div>
