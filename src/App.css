@@ -9,16 +9,14 @@
     "n c";
     font-family: "Roboto", sans-serif;
     height: 100vh;
-    background-image: url("./backgroungimg.jpg");
-    background-color: whitesmoke;
-    background-repeat: unset;
+    background: url("https://oboi-ma.ru/f/product/da60104.jpg") repeat;
     background-size: inherit;
     box-sizing: border-box;
 }
 
 .app-wrapper-content {
     grid-area: c;
-    background-color: rgba(245,245,245,0.2);
+    background-color: rgba(245, 245, 245, 0.2);
     padding: 20px;
     margin: 10px;
     border-radius: 10px;

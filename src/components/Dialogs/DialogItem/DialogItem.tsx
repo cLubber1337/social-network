@@ -10,14 +10,14 @@ type dialogsData = {
     name: string
 }
 
-export const DialogItem = (props:DialogItemPropsType) => {
+export const DialogItem = (props: DialogItemPropsType) => {
     return (
-        <div className={s.dialog}>
+        <div className={s.dialogItem}>
             {props.dialogsData.map(m => (
-                <NavLink to="dialogs/1"><div key={m.id}>{m.name}</div></NavLink>
-                    ))}
+                <NavLink className={s.name} key={m.id} to="dialogs/1">
+                    <div>{m.name}</div>
+                </NavLink>))}
         </div>
-
 
     )
 }

@@ -23,7 +23,7 @@ export const Dialogs = () => {
     ]
 
     let messagesData: messagesDataType[] = [
-        {id: 1, message: "Hi"},
+        {id: 1, message: "Hi!"},
         {id: 2, message: "How do you do?"},
         {id: 3, message: "I go to school!"},
         {id: 4, message: "I like play basketball"},

@@ -11,9 +11,9 @@ type messagesData = {
 
 export const Message = (props:MessagePropsType) => {
     return (
-        <div className={s.message}>
+        <div className={s.allMessages}>
             {props.messagesData.map(m =>(
-                <div key={m.id}>
+                <div className={s.message} key={m.id}>
                     {m.message}
                 </div>))}
         </div>

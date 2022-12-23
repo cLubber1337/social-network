@@ -1,6 +1,7 @@
 import React from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
+import {postsData} from "../../../index";
 
 export const MyPosts = () => {
     return (
@@ -12,8 +13,7 @@ export const MyPosts = () => {
                     <button>Add post</button>
                 </div>
             </div>
-            <Post/>
-            <Post/>
+            <Post postsData={postsData}/>
         </div>
     )
 }

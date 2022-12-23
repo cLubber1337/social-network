@@ -5,7 +5,7 @@ export const ProfileInfo = () => {
     return (
         <div>
             <div className={s.content}>
-            <img className={s.profileImg} src="https://cdn.pixabay.com/photo/2021/03/03/08/39/woman-6064799_960_720.jpg" alt="profile"/>
+            <img className={s.profileImg} src="https://img.freepik.com/premium-vector/portrait-young-man-avatar-guy-social-networks-abstract-male-portrait-full-face-isolated-illustration-flat-style_276162-44.jpg?w=826"/>
         Description
             </div>
         </div>
