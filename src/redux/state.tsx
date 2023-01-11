@@ -1,31 +1,33 @@
-type PostsType = {
+export type PostsType = {
     id: number,
     text: string,
     photo: string,
     like: number
 }
-type DialogsDataType = {
+export type DialogsDataType = {
     id: number,
     name: string
 }
-type MessagesDataType = {
+export type MessagesDataType = {
     id: number,
     message: string
 }
-type ProfilePageType = {
+export type ProfilePageType = {
     postsData: PostsType[]
+    newPostText: string
 }
-type DialogsPageType =  {
+export type DialogsPageType = {
     dialogsData: DialogsDataType[]
     messagesData: MessagesDataType[]
 }
-type RootStateType = {
+export type RootStateType = {
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType
 }
 
 export let state: RootStateType = {
     profilePage: {
+        newPostText: "Hello Andrey!",
         postsData: [
             {
                 id: 1,
@@ -66,7 +68,28 @@ export let state: RootStateType = {
         ]
     }
 }
+let rerenderEntireTree = () => {
+    console.log("Was changed")
+}
+export let addPost = () => {
+    let newPost: PostsType = {
+        id: 4,
+        text: state.profilePage.newPostText,
+        photo: "https://img.freepik.com/free-vector/korean-drawing-style-character-design_52683-92286.jpg?w=826&t=st=1671760295~exp=1671760895~hmac=a9c8ddfc28e01fc5e416f6f10e1e3db6b696cbf23900fd1c9fb313b6a4612ac8",
+        like: 777
+    }
+    state.profilePage.postsData.unshift(newPost)
+    rerenderEntireTree()
+}
 
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree()
+}
+export const subscribe = (observer: () => void) => {
+    rerenderEntireTree = observer
+}
 
 
 

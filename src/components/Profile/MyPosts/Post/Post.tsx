@@ -1,19 +1,15 @@
 import React from 'react';
 import s from "./Post.module.css"
+import {ProfilePageType} from "../../../../redux/state";
 
 type PropsType = {
-    posts: PostsType[]
+    posts: ProfilePageType
 }
-type PostsType = {
-    id: number,
-    text: string,
-    photo: string,
-    like: number
-}
+
 export const Post = (props: PropsType) => {
     return (
         <div className={s.content}>
-            {props.posts.map(m => (
+            {props.posts.postsData.map(m => (
                 <div className={s.post} key={m.id}>
                     <div className={s.photoText}>
                         <img className={s.photo} src={m.photo} alt={"userName"}/>

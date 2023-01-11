@@ -1,26 +1,35 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
+import {ProfilePageType} from "../../../redux/state";
 
 type PropsType = {
-    posts: PostsType[]
+    posts: ProfilePageType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
-type PostsType = {
-    id: number,
-    text: string,
-    photo: string,
-    like: number
-}
-
 
 export const MyPosts = (props: PropsType) => {
+
+    const addPost = () => {
+        props.addPost()
+    }
+
+    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostText(e.currentTarget.value)
+    }
+
+
     return (
         <div className={s.content}>
-           <h3>MY POSTS</h3>
+            <h3>MY POSTS</h3>
             <div>
-                <textarea></textarea>
+                <textarea
+                    onChange={onPostChange}
+                    value={props.posts.newPostText}
+                />
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <Post posts={props.posts}/>

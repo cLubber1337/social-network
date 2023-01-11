@@ -8,48 +8,29 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
+import {RootStateType, updateNewPostText} from "./redux/state";
 
 
 type PropsType = {
     state: RootStateType
-}
-type PostsType = {
-    id: number,
-    text: string,
-    photo: string,
-    like: number
-}
-type DialogsDataType = {
-    id: number,
-    name: string
-}
-type MessagesDataType = {
-    id: number,
-    message: string
-}
-type ProfilePageType = {
-    postsData: PostsType[]
-}
-type DialogsPageType =  {
-    dialogsData: DialogsDataType[]
-    messagesData: MessagesDataType[]
-}
-type RootStateType = {
-    profilePage: ProfilePageType,
-    dialogsPage: DialogsPageType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
-function App(props:PropsType) {
+
+function App(props: PropsType) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <NavBar/>
-                <Route path="/profile" render={()=><Profile
-                    posts={props.state.profilePage.postsData}
+                <Route path="/profile" render={() => <Profile
+                    profilePage={props.state.profilePage}
+                    addPost={props.addPost}
+                    updateNewPostText={props.updateNewPostText}
                 />}/>
 
-                <Route path="/dialogs/" render={()=> <Dialogs
+                <Route path="/dialogs/" render={() => <Dialogs
                     dialogs={props.state.dialogsPage.dialogsData}
                     messages={props.state.dialogsPage.messagesData}
                 />}/>
