@@ -27,13 +27,19 @@ export type RootStateType = {
 
 export type StoreType = {
     _state: RootStateType
-    getState: () => void
+    getState: () => RootStateType
     _callSubscriber: () => void
-    addPost:() => void
-    updateNewPostText:(newText: string) => void
     subscribe: (observer:() => void) => void
+    dispatch: (action: AddPostActionType | UpdateNewPostTextType) => void
 }
 
+export type AddPostActionType = {
+    type: "ADD-POST"
+}
+export type UpdateNewPostTextType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
 
 let store: StoreType = {
     _state: {
@@ -79,30 +85,33 @@ let store: StoreType = {
             ]
         }
     },
-    getState() {
-        return this._state
-    },
     _callSubscriber() {
         console.log("Was changed")
     },
-    addPost() {
-        let newPost: PostsType = {
-            id: 4,
-            text: this._state.profilePage.newPostText,
-            photo: "https://img.freepik.com/free-vector/korean-drawing-style-character-design_52683-92286.jpg?w=826&t=st=1671760295~exp=1671760895~hmac=a9c8ddfc28e01fc5e416f6f10e1e3db6b696cbf23900fd1c9fb313b6a4612ac8",
-            like: 777
-        }
-        this._state.profilePage.postsData.unshift(newPost)
-        // this._state.profilePage.newPostText = ""
-        this._callSubscriber()
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber()
+    getState() {
+        return this._state
     },
     subscribe(observer: () => void) {
         this._callSubscriber = observer
+    },
+
+    dispatch(action) {
+        if(action.type === "ADD-POST") {
+                let newPost: PostsType = {
+                    id: 4,
+                    text: this._state.profilePage.newPostText,
+                    photo: "https://img.freepik.com/free-vector/korean-drawing-style-character-design_52683-92286.jpg?w=826&t=st=1671760295~exp=1671760895~hmac=a9c8ddfc28e01fc5e416f6f10e1e3db6b696cbf23900fd1c9fb313b6a4612ac8",
+                    like: 777
+                }
+                this._state.profilePage.postsData.unshift(newPost)
+                this._state.profilePage.newPostText = ""
+                this._callSubscriber()
+            } else if(action.type === "UPDATE-NEW-POST-TEXT") {
+                this._state.profilePage.newPostText = action.newText
+                this._callSubscriber()
+        }
     }
+
 }
 export default store
 
