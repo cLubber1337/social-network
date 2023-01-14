@@ -1,31 +1,38 @@
-import React, {RefObject} from 'react';
+import React, {ChangeEvent, RefObject} from 'react';
 import s from "./Message.module.css"
+import {
+    addMessageActionCreator,
+    AddMessageActionType, DialogsPageType, MessagesDataType, updateNewMessageTextActionCreator,
+    UpdateNewMessageTextType,
+    updateNewPostTextActionCreator
+} from "../../../redux/state";
 
 type PropsType = {
     messages: MessagesDataType[]
-}
-type MessagesDataType = {
-    id: number,
-    message: string
+    dialogsPage: DialogsPageType
+    dispatch: (action: AddMessageActionType | UpdateNewMessageTextType) => void
 }
 
-export const Message = (props: PropsType) => {
 
-    let messageElement = props.messages.map(m =>
-        (<div className={s.message} key={m.id}>{m.message}</div>))
+export const Message: React.FC<PropsType> = ({messages, dispatch, dialogsPage}) => {
 
-let newMessageElement: RefObject<HTMLTextAreaElement> = React.createRef()
+    let messageElement = messages.map(m =>
+        (<div className={s.message} key={m.id}>
+            {m.message}
+        </div>))
 
     const addMessage = () => {
-        alert(newMessageElement.current?.value)
+        dispatch(addMessageActionCreator())
     }
-
+    const onChangeMessage = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        dispatch(updateNewMessageTextActionCreator(e.currentTarget.value))
+    }
 
     return (
         <div className={s.allMessages}>
             {messageElement}
             <div>
-                <textarea ref={newMessageElement}></textarea>
+                <textarea value={dialogsPage.newMessageText} onChange={onChangeMessage}></textarea>
                 <div>
                     <button onClick={addMessage}>send</button>
                 </div>

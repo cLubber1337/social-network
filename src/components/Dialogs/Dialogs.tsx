@@ -2,11 +2,19 @@ import React from 'react';
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsDataType, MessagesDataType} from "../../redux/state";
+import {
+    AddMessageActionType,
+    AddPostActionType,
+    DialogsDataType, DialogsPageType,
+    MessagesDataType, ProfilePageType, UpdateNewMessageTextType,
+    UpdateNewPostTextType
+} from "../../redux/state";
 
 type PropsType = {
+    dialogsPage: DialogsPageType
     dialogs: DialogsDataType[]
     messages: MessagesDataType[]
+    dispatch: (action: AddMessageActionType | UpdateNewMessageTextType) => void
 }
 
 
@@ -21,7 +29,10 @@ export const Dialogs = (props:PropsType) => {
             </div>
 
             <div className={s.messages}>
-                <Message messages={props.messages}/>
+                <Message messages={props.messages}
+                         dispatch={props.dispatch}
+                         dialogsPage={props.dialogsPage}
+                />
             </div>
 
         </div>

@@ -16,14 +16,14 @@ type PropsType = {
 
 
 
-export const MyPosts = (props: PropsType) => {
+export const MyPosts: React.FC<PropsType> = ({posts, dispatch}) => {
 
     const addPost = () => {
-        props.dispatch(addPostActionCreator())
+        dispatch(addPostActionCreator())
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewPostTextActionCreator(e.currentTarget.value))
+        dispatch(updateNewPostTextActionCreator(e.currentTarget.value))
     }
 
     return (
@@ -32,13 +32,13 @@ export const MyPosts = (props: PropsType) => {
             <div>
                 <textarea
                     onChange={onPostChange}
-                    value={props.posts.newPostText}
+                    value={posts.newPostText}
                 />
                 <div>
                     <button onClick={addPost}>Add post</button>
                 </div>
             </div>
-            <Post posts={props.posts}/>
+            <Post posts={posts}/>
         </div>
     )
 }
