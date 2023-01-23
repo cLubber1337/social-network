@@ -1,3 +1,6 @@
+import profilePageReducer from "./profilePage-reducer";
+import dialogsPageReducer from "./dialogsPage-reducer";
+
 export type PostsType = {
     id: number,
     text: string,
@@ -105,49 +108,14 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            let newPost: PostsType = {
-                id: 4,
-                text: this._state.profilePage.newPostText,
-                photo: "https://img.freepik.com/free-vector/korean-drawing-style-character-design_52683-92286.jpg?w=826&t=st=1671760295~exp=1671760895~hmac=a9c8ddfc28e01fc5e416f6f10e1e3db6b696cbf23900fd1c9fb313b6a4612ac8",
-                like: 777
-            }
-            this._state.profilePage.postsData.unshift(newPost)
-            this._state.profilePage.newPostText = ""
-            this._callSubscriber()
-
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber()
-
-        } else if (action.type === "ADD-MESSAGE") {
-            let newMessage: MessagesDataType = {id: 6, message: this._state.dialogsPage.newMessageText}
-            this._state.dialogsPage.messagesData.push(newMessage)
-            this._state.dialogsPage.newMessageText = ""
-            this._callSubscriber()
-
-        } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
-            this._state.dialogsPage.newMessageText = action.newMessage
-            this._callSubscriber()
-        }
+        this._state.profilePage = profilePageReducer(this._state.profilePage , action as AddPostActionType | UpdateNewPostTextType)
+        this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage , action as AddMessageActionType | UpdateNewMessageTextType)
+        this._callSubscriber()
     }
 
 }
 export default store
-///----POSTS
-export const addPostActionCreator: () => AddPostActionType = () => {
-    return {type: "ADD-POST"}
-}
-export const updateNewPostTextActionCreator: (text: string) => UpdateNewPostTextType = (text: string) => {
-    return {type: "UPDATE-NEW-POST-TEXT", newText: text}
-}
-///----MESSAGE
-export const addMessageActionCreator: () => AddMessageActionType = () => {
-    return {type: "ADD-MESSAGE"}
-}
-export const updateNewMessageTextActionCreator: (text: string) => UpdateNewMessageTextType = (text: string) => {
-    return {type: "UPDATE-NEW-MESSAGE-TEXT", newMessage: text}
-}
+
 
 
 

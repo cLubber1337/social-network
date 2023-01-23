@@ -1,11 +1,12 @@
-import React, {ChangeEvent, RefObject} from 'react';
+import React, {ChangeEvent} from 'react';
 import s from "./Message.module.css"
 import {
-    addMessageActionCreator,
-    AddMessageActionType, DialogsPageType, MessagesDataType, updateNewMessageTextActionCreator,
+    AddMessageActionType, DialogsPageType, MessagesDataType,
     UpdateNewMessageTextType,
-    updateNewPostTextActionCreator
 } from "../../../redux/state";
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../../redux/dialogsPage-reducer";
+
+
 
 type PropsType = {
     messages: MessagesDataType[]

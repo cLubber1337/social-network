@@ -2,18 +2,16 @@ import React, {ChangeEvent} from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {
-    addPostActionCreator,
     AddPostActionType,
     ProfilePageType,
-    updateNewPostTextActionCreator,
     UpdateNewPostTextType
 } from "../../../redux/state";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profilePage-reducer";
 
 type PropsType = {
     posts: ProfilePageType
     dispatch: (action: AddPostActionType | UpdateNewPostTextType) => void
 }
-
 
 
 export const MyPosts: React.FC<PropsType> = ({posts, dispatch}) => {
