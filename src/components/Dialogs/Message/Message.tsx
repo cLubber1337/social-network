@@ -1,9 +1,9 @@
 import React, {ChangeEvent} from 'react';
 import s from "./Message.module.css"
-import {MessagesDataType} from "../../../redux/store";
+import {DialogsPageType} from "../../../redux/store";
 
 type PropsType = {
-    messages: MessagesDataType[]
+    messages: DialogsPageType
     updateNewMessageText: (NewMessageText: string) => void
     addMessage: () => void
     newMessageText: string
@@ -13,7 +13,7 @@ export const Message: React.FC<PropsType> = ({
                                                  messages, updateNewMessageText,
                                                  addMessage, newMessageText
                                              }) => {
-    let messageElement = messages.map(m => (<div className={s.message} key={m.id}>{m.message}</div>))
+    let messageElement = messages.messagesData.map(m => (<div className={s.message} key={m.id}>{m.message}</div>))
     const onClickAddMessage = () => addMessage()
     const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => updateNewMessageText(e.currentTarget.value)
     const button = newMessageText.length === 0
