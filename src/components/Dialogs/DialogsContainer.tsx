@@ -1,28 +1,36 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogsPage-reducer";
-import {RootStateType} from "../../redux/store";
+import {
+    addMessageActionCreator,
+    InitialStateType,
+    updateNewMessageTextActionCreator
+} from "../../redux/dialogsPage-reducer";
 import {AppStateType} from "../../redux/redux-store";
+import {Dispatch} from "redux";
 
 type MapStateToPropsType = {
-    dialogsPage:
+    dialogsPage: InitialStateType
+    newMessageText: string
+}
+type MapDispatchToProps = {
+    updateNewMessageText: (NewMessageText: string) => void
+    addMessage: () => void
 }
 
-
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: AppStateType ) : MapStateToPropsType => {
     return {
-        dialogsPage: state.dialogsPage,
-        newMessageText: state.dialogsPage
+        dialogsPage: state.dialogPage,
+        newMessageText: state.dialogPage.newMessageText
     }
 }
-let mapDispatchToProps = (dispatch: (arg0: { type: "ADD-MESSAGE" | "UPDATE-NEW-MESSAGE-TEXT"; newMessage?: string; }) => void) => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
-        updateNewMessageText: () => {
-            dispatch(addMessageActionCreator())
-        },
-        addMessage: (NewMessageText: string) => {
+        updateNewMessageText: (NewMessageText: string) => {
             dispatch(updateNewMessageTextActionCreator(NewMessageText))
+        },
+        addMessage: () => {
+            dispatch(addMessageActionCreator())
         }
     }
 }

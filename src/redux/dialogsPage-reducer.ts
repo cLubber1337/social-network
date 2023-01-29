@@ -1,4 +1,15 @@
-import {AddMessageActionType, DialogsPageType, MessagesDataType, UpdateNewMessageTextType} from "./store";
+import {AddMessageActionType, UpdateNewMessageTextType} from "./store";
+
+export type DialogsType = {
+    id: number,
+    name: string
+}
+export type MessagesType = {
+    id: number,
+    message: string
+}
+
+export type InitialStateType = typeof initialState
 
 let initialState = {
     newMessageText: "",
@@ -9,23 +20,25 @@ let initialState = {
         {id: 4, name: "Igor"},
         {id: 5, name: "Henry"},
         {id: 6, name: "Nina"},
-    ],
+    ] as DialogsType[] ,
     messagesData: [
         {id: 1, message: "Hi!"},
         {id: 2, message: "How do you do?"},
         {id: 3, message: "I go to school!"},
         {id: 4, message: "I like play basketball"},
-        {id: 5, message: "My name is AbubaBaba"},
+        {id: 5, message: "My name is Henry"},
         {id: 6, message: "What!?????"},
-    ]
+    ] as MessagesType[]
 }
 
 
-const dialogsPageReducer = (state: DialogsPageType = initialState, action: AddMessageActionType | UpdateNewMessageTextType) => {
+const dialogsPageReducer = (state:InitialStateType= initialState,
+                            action: AddMessageActionType
+                                | UpdateNewMessageTextType): InitialStateType => {
 
     switch (action.type) {
         case "ADD-MESSAGE":
-            let newMessage: MessagesDataType = {id: 6, message: state.newMessageText}
+            let newMessage: MessagesType = {id: 6, message: state.newMessageText}
             state.messagesData.push(newMessage)
             state.newMessageText = ""
             return state

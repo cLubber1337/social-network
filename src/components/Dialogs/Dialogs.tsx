@@ -18,8 +18,6 @@ export const Dialogs: React.FC<PropsType> = ({
                                                  addMessage,
                                                  newMessageText,
                                              }) => {
-
-
     return (
         <div className={s.dialogs}>
 

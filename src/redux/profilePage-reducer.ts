@@ -1,4 +1,14 @@
-import {AddPostActionType, PostsType, ProfilePageType, UpdateNewPostTextType} from "./store";
+import {AddPostActionType, PostsType, UpdateNewPostTextType} from "./store";
+
+export type PostType = {
+    id: number,
+    text: string,
+    photo: string,
+    like: number
+}
+
+
+export type InitialStateType = typeof initialState
 
 let initialState = {
     newPostText: "",
@@ -21,11 +31,11 @@ let initialState = {
             photo: "https://img.freepik.com/premium-vector/cartoon-style-illustration-man-smile-confidently-with-crossed-hand-chest_7443-231.jpg?w=826",
             like: 10
         },
-    ],
+    ] as PostType[],
 
 }
 
-const profilePageReducer = (state: ProfilePageType = initialState, action: AddPostActionType | UpdateNewPostTextType) => {
+const profilePageReducer = (state: InitialStateType = initialState, action: AddPostActionType | UpdateNewPostTextType):InitialStateType => {
     switch (action.type) {
         case "ADD-POST":
             let newPost: PostsType = {

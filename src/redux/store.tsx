@@ -13,7 +13,7 @@ export type DialogsDataType = {
 }
 export type MessagesDataType = {
     id: number,
-    message: string | undefined
+    message: string
 }
 export type ProfilePageType = {
     postsData: PostsType[]
@@ -22,7 +22,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogsData: DialogsDataType[]
     messagesData: MessagesDataType[]
-    newMessageText?: string
+    newMessageText: string
 }
 export type RootStateType = {
     profilePage: ProfilePageType,
