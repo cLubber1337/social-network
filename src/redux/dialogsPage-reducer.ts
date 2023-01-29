@@ -1,7 +1,27 @@
-import {AddMessageActionType, DialogsPageType, MessagesDataType, UpdateNewMessageTextType} from "./state";
+import {AddMessageActionType, DialogsPageType, MessagesDataType, UpdateNewMessageTextType} from "./store";
+
+let initialState = {
+    newMessageText: "",
+    dialogsData: [
+        {id: 1, name: "Andrey"},
+        {id: 2, name: "Zina"},
+        {id: 3, name: "Kali"},
+        {id: 4, name: "Igor"},
+        {id: 5, name: "Henry"},
+        {id: 6, name: "Nina"},
+    ],
+    messagesData: [
+        {id: 1, message: "Hi!"},
+        {id: 2, message: "How do you do?"},
+        {id: 3, message: "I go to school!"},
+        {id: 4, message: "I like play basketball"},
+        {id: 5, message: "My name is AbubaBaba"},
+        {id: 6, message: "What!?????"},
+    ]
+}
 
 
-const dialogsPageReducer = (state: DialogsPageType, action: AddMessageActionType | UpdateNewMessageTextType) => {
+const dialogsPageReducer = (state: DialogsPageType = initialState, action: AddMessageActionType | UpdateNewMessageTextType) => {
 
     switch (action.type) {
         case "ADD-MESSAGE":

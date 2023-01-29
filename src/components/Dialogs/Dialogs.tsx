@@ -2,37 +2,26 @@ import React from 'react';
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {
-    AddMessageActionType,
-    AddPostActionType,
-    DialogsDataType, DialogsPageType,
-    MessagesDataType, ProfilePageType, UpdateNewMessageTextType,
-    UpdateNewPostTextType
-} from "../../redux/state";
+import {StoreType} from "../../redux/store";
+import {MessageContainer} from "./Message/MessageContainer";
 
 type PropsType = {
-    dialogsPage: DialogsPageType
-    dialogs: DialogsDataType[]
-    messages: MessagesDataType[]
-    dispatch: (action: AddMessageActionType | UpdateNewMessageTextType) => void
+   store: StoreType
 }
 
-
-
-export const Dialogs = (props:PropsType) => {
+export const Dialogs: React.FC<PropsType> = ({store}) => {
+    let state = store.getState().dialogsPage
 
     return (
         <div className={s.dialogs}>
 
             <div className={s.dialogsItems}>
-                <DialogItem dialogs={props.dialogs}/>
+                <DialogItem dialogs={state.dialogsData}/>
             </div>
 
+
             <div className={s.messages}>
-                <Message messages={props.messages}
-                         dispatch={props.dispatch}
-                         dialogsPage={props.dialogsPage}
-                />
+                <MessageContainer store={store}/>
             </div>
 
         </div>

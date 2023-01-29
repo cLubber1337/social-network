@@ -1,41 +1,31 @@
 import React, {ChangeEvent} from 'react';
 import s from "./Message.module.css"
-import {
-    AddMessageActionType, DialogsPageType, MessagesDataType,
-    UpdateNewMessageTextType,
-} from "../../../redux/state";
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../../redux/dialogsPage-reducer";
-
-
+import {MessagesDataType} from "../../../redux/store";
 
 type PropsType = {
     messages: MessagesDataType[]
-    dialogsPage: DialogsPageType
-    dispatch: (action: AddMessageActionType | UpdateNewMessageTextType) => void
+    updateNewMessageText: (NewMessageText: string) => void
+    addMessage: () => void
+    newMessageText: string
 }
 
+export const Message: React.FC<PropsType> = ({
+                                                 messages, updateNewMessageText,
+                                                 addMessage, newMessageText
+                                             }) => {
+    let messageElement = messages.map(m => (<div className={s.message} key={m.id}>{m.message}</div>))
+    const onClickAddMessage = () => addMessage()
+    const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => updateNewMessageText(e.currentTarget.value)
+    const button = newMessageText.length === 0
 
-export const Message: React.FC<PropsType> = ({messages, dispatch, dialogsPage}) => {
-
-    let messageElement = messages.map(m =>
-        (<div className={s.message} key={m.id}>
-            {m.message}
-        </div>))
-
-    const addMessage = () => {
-        dispatch(addMessageActionCreator())
-    }
-    const onChangeMessage = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(updateNewMessageTextActionCreator(e.currentTarget.value))
-    }
 
     return (
         <div className={s.allMessages}>
             {messageElement}
             <div>
-                <textarea value={dialogsPage.newMessageText} onChange={onChangeMessage}></textarea>
+                <textarea value={newMessageText} onChange={onChangeMessage}></textarea>
                 <div>
-                    <button onClick={addMessage}>send</button>
+                    <button disabled={button} onClick={onClickAddMessage}>send</button>
                 </div>
             </div>
         </div>
