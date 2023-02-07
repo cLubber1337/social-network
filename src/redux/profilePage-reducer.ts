@@ -44,12 +44,10 @@ const profilePageReducer = (state: InitialStateType = initialState, action: AddP
                 photo: "https://img.freepik.com/free-vector/korean-drawing-style-character-design_52683-92286.jpg?w=826&t=st=1671760295~exp=1671760895~hmac=a9c8ddfc28e01fc5e416f6f10e1e3db6b696cbf23900fd1c9fb313b6a4612ac8",
                 like: 777
             }
-            state.postsData.unshift(newPost)
-            state.newPostText = ""
-            return state
+            return {...state, postsData: [newPost,...state.postsData], newPostText: ""}
         case "UPDATE-NEW-POST-TEXT":
-            state.newPostText = action.newText
-            return state
+            return {...state, newPostText: action.newText}
+
         default:
             return state
     }

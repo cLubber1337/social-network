@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./NavBar.module.css"
 import profile from "./icon/profile.png";
 import chat from "./icon/chat.png";
+import users from "./icon/users.png";
 import news from "./icon/news.png";
 import settings from "./icon/settings.png";
 import music from "./icon/music.png";
@@ -40,6 +41,12 @@ export const NavBar = () => {
                     <li className={s.item}>
                         <img src={settings} alt="settings"/>
                         <span>Settings</span>
+                    </li>
+                </NavLink>
+                <NavLink style={{textDecoration: "none"}} activeClassName={s.active} to="/users">
+                    <li className={s.item}>
+                        <img src={users} alt="users"/>
+                        <span>Find users</span>
                     </li>
                 </NavLink>
             </ul>
