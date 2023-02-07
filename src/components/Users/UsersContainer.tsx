@@ -1,9 +1,9 @@
 import React from 'react';
-import {Users} from "./Users";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 import {followAC, setUsersAC, unfollowAC, UsersType} from "../../redux/usersPage-reducer";
+import UsersC from "./UsersC";
 
 
 type MapStateToPropsType = {
@@ -18,7 +18,7 @@ type MapDispatchToProps = {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        users: state.usersPage.users,
+        users: state.usersPage.items,
     }
 }
 
@@ -36,5 +36,5 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersC)
 

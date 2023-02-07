@@ -13,34 +13,34 @@ export type SetUsersAC = {
 
 
 export type UsersType = {
-    id: number, followed: boolean, fullName: string, status: string, location: { city: string, country: string }
+    name: string
+    id: number
+    uniqueUrlName: string | null
+    photos: {
+        small: string | null
+        large: string | null
+    }
+    status: string | null
+    followed: boolean
 }
 
 type InitialStateType = typeof initialState
 
 let initialState = {
-    users: [
-        {id: 1, followed: true, fullName: "Bob", status: "I like fish", location: {city: "New York", country: "USA"}},
-        {
-            id: 2,
-            followed: false,
-            fullName: "Jack",
-            status: "I am a student",
-            location: {city: "Lost Angels", country: "USA"}
-        },
-        {id: 3, followed: true, fullName: "Akira  ", status: "アキラ", location: {city: "Tokyo", country: "Japan"}},
-        {id: 4, followed: false, fullName: "Asa", status: "青木", location: {city: "Osaka", country: "Japan"}},
-    ] as UsersType[]
+    items: [] as UsersType[]
 }
 
 const usersReducer = (state: InitialStateType = initialState, action: FollowTypeAC | UnfollowTypeAC | SetUsersAC): InitialStateType => {
     switch (action.type) {
         case "FOLLOW":
-            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)}
+            return <InitialStateType>{
+                ...state,
+                items: state.items.map(u => u.id === action.userId ? {...u, followed: true} : u)
+            }
         case "UNFOLLOW":
-            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)}
+            return {...state, items: state.items.map(u => u.id === action.userId ? {...u, followed: false} : u)}
         case "SET_USERS":
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, items: [...state.items, ...action.users]}
         default:
             return state
     }
