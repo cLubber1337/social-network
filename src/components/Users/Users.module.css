@@ -56,4 +56,43 @@
     padding: 20px;
     justify-content: space-between;
 }
-
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+.page {
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgb(4, 99, 128, 1);
+    border-radius: 50%;
+    color:rgb(4, 99, 128, 1) ;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.2s;
+}
+.page:hover {
+    background-color:rgb(4, 99, 128, 0.2);
+}
+.page:active {
+    background-color:rgb(4, 99, 128, 1);
+    color: white;
+}
+.active {
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgb(4, 99, 128, 1);
+    border-radius: 50%;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.2s;
+    background-color:rgb(4, 99, 128, 0.7);
+    color: white;
+}
