@@ -1,7 +1,7 @@
 .app-wrapper {
     margin: 0 auto;
     display: grid;
-    width: 1200px;
+    width: 1300px;
     grid-template-rows: 70px 1fr;
     grid-template-columns: 2fr 10fr;
     grid-template-areas:
@@ -9,7 +9,6 @@
     "n c";
     font-family: "Roboto", sans-serif;
     height: 100vh;
-    background: url("https://oboi-ma.ru/f/product/da60104.jpg") repeat;
     background-size: inherit;
     box-sizing: border-box;
 }
