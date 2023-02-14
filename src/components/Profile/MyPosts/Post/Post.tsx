@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./Post.module.css"
-import {PostsType} from "../../../../redux/store";
+import {PostsType} from "../../../../redux/profilePage-reducer";
 
 type PropsType = {
     posts: PostsType[]

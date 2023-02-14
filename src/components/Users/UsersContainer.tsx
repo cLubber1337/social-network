@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/store";
 import {
     follow, toggleIsFetching,
     setCurrentPage,
@@ -13,7 +13,6 @@ import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader";
 
-
 type MapStateToPropsType = {
     users: UsersType[]
     pageSize: number
@@ -22,7 +21,6 @@ type MapStateToPropsType = {
     isFetching: boolean
 
 }
-
 type UsersPropsType = {
     users: UsersType[]
     follow: (userId: number) => void
@@ -70,14 +68,12 @@ class UsersContainer extends React.Component<UsersPropsType> {
                            totalUserCount={this.props.totalUserCount}
                            currentPage={this.props.currentPage}
                            onClickPageChanged={this.onClickPageChanged}/>
-
                 }
             </>
         )
 
     }
 }
-
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
