@@ -71,7 +71,6 @@ class UsersContainer extends React.Component<UsersPropsType> {
                 }
             </>
         )
-
     }
 }
 

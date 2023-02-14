@@ -6,7 +6,8 @@ import {AppStateType} from "../../redux/store";
 import {ProfileType, setUserProfile} from "../../redux/profilePage-reducer";
 
 type ProfilePropsType = {
-    setUserProfile: (profileData: ProfileType[]) => void
+    setUserProfile: (profileData: ProfileType) => void
+    profile: ProfileType
 }
 
 
@@ -21,14 +22,14 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
     render() {
         return (
-            <Profile {...this.props} />
+            <Profile {...this.props}/>
         )
     }
 
 }
 
 let mapStateToProps = (state: AppStateType) => ({
-    a: 13
+    profile: state.profilePage.profile
 })
 
 export default connect(mapStateToProps, {

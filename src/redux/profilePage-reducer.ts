@@ -27,8 +27,8 @@ export type ProfileType = {
     fullName: string,
     userId: number,
     photos: {
-        "small": null | string,
-        "large": null | string
+        small: string | undefined,
+        large: string | undefined
     }
 }
 
@@ -41,7 +41,7 @@ export type UpdateNewPostTextType = {
 }
 export type SetUserProfileType = {
     type: "SET-USER-PROFILE"
-    profile: ProfileType[]
+    profile: ProfileType
 }
 
 type ActionTypes = AddPostActionType | UpdateNewPostTextType | SetUserProfileType
@@ -70,7 +70,7 @@ let initialState = {
             like: 10
         },
     ] as PostType[],
-    profile: [] as ProfileType[],
+    profile: {} as ProfileType,
 }
 
 const profilePageReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
@@ -98,7 +98,7 @@ export const addPost: () => AddPostActionType = () => {
 export const updateNewPostText: (text: string) => UpdateNewPostTextType = (text: string) => {
     return {type: "UPDATE-NEW-POST-TEXT", newText: text}
 }
-export const setUserProfile = (profile: ProfileType[]): SetUserProfileType => {
+export const setUserProfile = (profile: ProfileType): SetUserProfileType => {
     return {type: "SET-USER-PROFILE", profile}
 }
 
