@@ -1,12 +1,12 @@
-import profilePageReducer from "./profilePage-reducer";
+import profilePageReducer, {
+    AddPostActionType,
+    PostsType,
+    ProfileType,
+    UpdateNewPostTextType
+} from "./profilePage-reducer";
 import dialogsPageReducer from "./dialogsPage-reducer";
 
-export type PostsType = {
-    id: number,
-    text: string,
-    photo: string,
-    like: number
-}
+
 export type DialogsDataType = {
     id: number,
     name: string
@@ -17,6 +17,7 @@ export type MessagesDataType = {
 }
 export type ProfilePageType = {
     postsData: PostsType[]
+    profile: ProfileType[]
     newPostText: string
 }
 export type DialogsPageType = {
@@ -37,13 +38,7 @@ export type StoreType = {
     dispatch: (action: AddPostActionType | UpdateNewPostTextType | AddMessageActionType | UpdateNewMessageTextType) => void
 }
 
-export type AddPostActionType = {
-    type: "ADD-POST"
-}
-export type UpdateNewPostTextType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
-}
+
 export type AddMessageActionType = {
     type: "ADD-MESSAGE"
 }
@@ -56,6 +51,7 @@ let store: StoreType = {
     _state: {
         profilePage: {
             newPostText: "",
+            profile: [],
             postsData: [
                 {
                     id: 1,
@@ -95,7 +91,7 @@ let store: StoreType = {
                 {id: 5, message: "My name is AbubaBaba"},
                 {id: 6, message: "What!?????"},
             ]
-        }
+        },
     },
     _callSubscriber() {
         console.log("Was changed")

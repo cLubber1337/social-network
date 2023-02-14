@@ -1,6 +1,7 @@
 import React from 'react';
 import style from "./Users.module.css";
 import {UsersType} from "../../redux/usersPage-reducer";
+import {NavLink} from "react-router-dom";
 
 
 type UsersPropsType = {
@@ -34,9 +35,11 @@ const Users: React.FC<UsersPropsType> = ({
             {users.map((user) =>
                 <div className={style.subscriber} key={user.id}>
                     <div className={style.photoStatus}>
-                        <img className={style.photo}
-                             src={user.photos.small === null ? "https://cdn-icons-png.flaticon.com/512/149/149071.png" : user.photos.small }
-                             alt="user"/>
+                        <NavLink to={`/profile/${user.id}`}>
+                            <img className={style.photo}
+                                 src={user.photos.small === null ? "https://cdn-icons-png.flaticon.com/512/149/149071.png" : user.photos.small }
+                                 alt="user"/>
+                        </NavLink>
                         <button className={style.button}
                                 onClick={user.followed ? () => unFollow(user.id) : () => follow(user.id)}>
                             {user.followed ? "Unfollow" : "Follow"}
