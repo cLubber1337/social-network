@@ -41,7 +41,7 @@ export type UpdateNewPostTextType = {
 }
 export type SetUserProfileType = {
     type: "SET-USER-PROFILE"
-    profile: ProfileType
+    profile: ProfileType | null
 }
 
 type ActionTypes = AddPostActionType | UpdateNewPostTextType | SetUserProfileType
@@ -59,18 +59,18 @@ let initialState = {
         },
         {
             id: 2,
-            text: "Baby, I love you! Come back, please!",
+            text: "I love you!",
             photo: "https://img.freepik.com/free-vector/korean-drawing-style-character-design_52683-92286.jpg?w=826&t=st=1671760295~exp=1671760895~hmac=a9c8ddfc28e01fc5e416f6f10e1e3db6b696cbf23900fd1c9fb313b6a4612ac8",
             like: 15
         },
         {
             id: 3,
-            text: "I drank like a pig yesterday!",
+            text: "Yo, what's up, bro?",
             photo: "https://img.freepik.com/premium-vector/cartoon-style-illustration-man-smile-confidently-with-crossed-hand-chest_7443-231.jpg?w=826",
             like: 10
         },
     ] as PostType[],
-    profile: {} as ProfileType,
+    profile: null as null | ProfileType ,
 }
 
 const profilePageReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
@@ -86,19 +86,24 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
         case "UPDATE-NEW-POST-TEXT":
             return {...state, newPostText: action.newText}
         case "SET-USER-PROFILE":
-            return {...state, profile: action.profile}
+            if (action.profile === null) {
+                return state
+            } else {
+                return {...state, profile: action.profile}
+            }
+
         default:
             return state
     }
 }
 
-export const addPost: () => AddPostActionType = () => {
+export const addPost= () : AddPostActionType => {
     return {type: "ADD-POST"}
 }
-export const updateNewPostText: (text: string) => UpdateNewPostTextType = (text: string) => {
+export const updateNewPostText = (text: string): UpdateNewPostTextType => {
     return {type: "UPDATE-NEW-POST-TEXT", newText: text}
 }
-export const setUserProfile = (profile: ProfileType): SetUserProfileType => {
+export const setUserProfile = (profile: ProfileType | null): SetUserProfileType => {
     return {type: "SET-USER-PROFILE", profile}
 }
 

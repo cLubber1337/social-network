@@ -6,7 +6,7 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../redux/profilePage-reducer";
 
 type ProfilePropsType = {
-    profile: ProfileType
+    profile: ProfileType | null
 }
 
 export const Profile: React.FC<ProfilePropsType> = ({profile}) => {

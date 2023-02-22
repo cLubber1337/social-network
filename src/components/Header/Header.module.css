@@ -1,10 +1,21 @@
 .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #046380;
     grid-area: h;
     border-bottom: 2px solid rgba(255, 255, 255, .09);
 
 }
+
 .logo {
-    padding-top: 10px;
-    margin-left: 210px;
+    padding-left: 200px;
+}
+
+.loginBlock {
+    padding-right: 50px;
+}
+.loginLink {
+    color: white;
+    text-decoration: none
 }
