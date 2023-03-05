@@ -2,7 +2,9 @@ import React from "react";
 import style from "./Users.module.css";
 import {UsersType} from "../../redux/usersPage-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {Pagination, Button, Avatar} from "@mui/material";
+import {usersAPI} from "../../api/api";
+
 
 type UsersPropsType = {
     users: UsersType[];
@@ -12,6 +14,8 @@ type UsersPropsType = {
     totalUserCount: number;
     currentPage: number;
     onClickPageChanged: (currentPage: number) => void;
+    toggleFollowingInProgress: (isFetching: boolean, userID: number) => void;
+    followingInProgress: number[]
 };
 
 const Users: React.FC<UsersPropsType> = ({
@@ -22,6 +26,8 @@ const Users: React.FC<UsersPropsType> = ({
                                              totalUserCount,
                                              pageSize,
                                              onClickPageChanged,
+                                             toggleFollowingInProgress,
+                                             followingInProgress
                                          }) => {
     let pageCount = Math.ceil(totalUserCount / pageSize);
     let page = [];
@@ -30,30 +36,25 @@ const Users: React.FC<UsersPropsType> = ({
     }
 
     const unFollowOnClick = (userID: number) => {
-        axios
-            .delete(
-                `https://social-network.samuraijs.com/api/1.0/follow/${userID}`,
-                {withCredentials: true, headers: {"API-KEY": "2a8c69e4-572a-4487-8ff6-116dea09581f"}},
-            )
+        toggleFollowingInProgress(true, userID)
+        usersAPI.follow(userID)
             .then((res) => {
                 if (res.data.resultCode === 0) {
                     unFollow(userID);
                 }
+                toggleFollowingInProgress(false, userID)
             });
     };
 
 
     const followOnClick = (userID: number) => {
-        axios
-            .post(
-                `https://social-network.samuraijs.com/api/1.0/follow/${userID}`,
-                {},
-                {withCredentials: true, headers: {"API-KEY": "2a8c69e4-572a-4487-8ff6-116dea09581f"}}
-            )
+        toggleFollowingInProgress(true, userID)
+        usersAPI.follow(userID)
             .then((res) => {
                 if (res.data.resultCode === 0) {
                     follow(userID);
                 }
+                toggleFollowingInProgress(false, userID)
             });
     };
 
@@ -63,8 +64,8 @@ const Users: React.FC<UsersPropsType> = ({
                 <div className={style.subscriber} key={user.id}>
                     <div className={style.photoStatus}>
                         <NavLink to={`/profile/${user.id}`}>
-                            <img
-                                className={style.photo}
+                            <Avatar
+                                sx={{width: 56, height: 56}}
                                 src={
                                     user.photos.small === null
                                         ? "https://cdn-icons-png.flaticon.com/512/149/149071.png"
@@ -75,19 +76,26 @@ const Users: React.FC<UsersPropsType> = ({
                         </NavLink>
 
                         {user.followed ? (
-                            <button
+                            <Button
+                                color={"primary"}
                                 className={style.button}
+                                variant={"outlined"}
                                 onClick={() => unFollowOnClick(user.id)}
+                                disabled={followingInProgress.some(id => id === user.id)}
                             >
                                 Unfollow
-                            </button>
+                            </Button>
                         ) : (
-                            <button
+                            <Button
+                                color={"primary"}
+                                variant={"contained"}
                                 className={style.button}
                                 onClick={() => followOnClick(user.id)}
+                                disabled={followingInProgress.some(id => id === user.id)}
+
                             >
                                 Follow
-                            </button>
+                            </Button>
                         )}
                     </div>
                     <div className={style.description}>
@@ -105,17 +113,15 @@ const Users: React.FC<UsersPropsType> = ({
                 </div>
             ))}
             <div className={style.pagination}>
-                {page.map((page) => {
-                    return (
-                        <span
-                            key={page}
-                            className={currentPage === page ? style.active : style.page}
-                            onClick={() => onClickPageChanged(page)}
-                        >
-              {page}
-            </span>
-                    );
-                })}
+                <div className={style.pagination}>
+                    <Pagination
+                        count={pageCount}
+                        color="primary"
+                        page={currentPage}
+                        onChange={(_, num) => onClickPageChanged(num)}
+                    />
+                </div>
+
             </div>
         </div>
     );

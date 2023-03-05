@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import logo from './mylogo.png'
+import logo from '../../assets/logo.png'
 import s from "./Header.module.css"
 import {NavLink} from "react-router-dom";
 import {AuthStateType} from "../../redux/auth-reducer";
