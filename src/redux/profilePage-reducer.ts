@@ -1,3 +1,7 @@
+import {usersAPI} from "../api/api";
+import {AppThunk} from "./store";
+
+
 export type PostsType = {
     id: number,
     text: string,
@@ -70,7 +74,7 @@ let initialState = {
             like: 10
         },
     ] as PostType[],
-    profile: null as null | ProfileType ,
+    profile: null as null | ProfileType,
 }
 
 const profilePageReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
@@ -91,18 +95,23 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
             } else {
                 return {...state, profile: action.profile}
             }
-
         default:
             return state
     }
 }
 
-export const addPost= () : AddPostActionType => {
+export const addPost = () : AddPostActionType => {
     return {type: "ADD-POST"}
 }
 export const updateNewPostText = (text: string): UpdateNewPostTextType => {
     return {type: "UPDATE-NEW-POST-TEXT", newText: text}
 }
+
+export const getUserProfile = (userID: string): AppThunk => async dispatch => {
+    let {data} = await usersAPI.getProfile(userID)
+    dispatch(setUserProfile(data))
+}
+
 export const setUserProfile = (profile: ProfileType | null): SetUserProfileType => {
     return {type: "SET-USER-PROFILE", profile}
 }

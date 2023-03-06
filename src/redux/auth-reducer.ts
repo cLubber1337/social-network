@@ -1,3 +1,6 @@
+import {AppThunk} from "./store";
+import {authAPI} from "../api/api";
+
 type setUserDataTypeAC = {
     type: "SET_USER_DATA";
     data: AuthDataType;
@@ -46,6 +49,15 @@ const authReducer = (
 export const setUserData = (data: AuthDataType): setUserDataTypeAC => {
     return {type: "SET_USER_DATA", data};
 };
+
+export const getAuthUserData = (): AppThunk => async dispatch => {
+    let {data} = await authAPI.me()
+            if (data.resultCode === 0) {
+                dispatch(setUserData(data))
+                dispatch(setAuth(true))
+            }
+}
+
 export const setAuth = (isAuth: boolean): setAuthTypeAC => {
     return {type: "SET_AUTH", isAuth};
 };
