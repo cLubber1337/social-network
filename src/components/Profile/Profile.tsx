@@ -7,12 +7,15 @@ import {ProfileType} from "../../redux/profilePage-reducer";
 
 type ProfilePropsType = {
     profile: ProfileType | null
+    userStatus: string
+    updateStatus: (status: string) => void
+    photoLarge: string
 }
 
-export const Profile: React.FC<ProfilePropsType> = ({profile}) => {
+export const Profile: React.FC<ProfilePropsType> = (props: ProfilePropsType) => {
     return (
         <div className={s.profile}>
-            <ProfileInfo profile={profile} />
+            <ProfileInfo {...props} />
             <MyPostsContainer/>
         </div>
     )

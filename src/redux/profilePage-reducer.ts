@@ -1,6 +1,8 @@
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 import {AppThunk} from "./store";
 
+type setCurrentStatusACType = ReturnType<typeof setStatus>
+type setUpdateStatusACType = ReturnType<typeof setUpdateStatus>
 
 export type PostsType = {
     id: number,
@@ -48,7 +50,12 @@ export type SetUserProfileType = {
     profile: ProfileType | null
 }
 
-type ActionTypes = AddPostActionType | UpdateNewPostTextType | SetUserProfileType
+type ActionTypes =
+    AddPostActionType
+    | UpdateNewPostTextType
+    | SetUserProfileType
+    | setCurrentStatusACType
+    | setUpdateStatusACType
 
 export type InitialStateType = typeof initialState
 
@@ -75,6 +82,7 @@ let initialState = {
         },
     ] as PostType[],
     profile: null as null | ProfileType,
+    userStatus: "",
 }
 
 const profilePageReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
@@ -95,17 +103,41 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
             } else {
                 return {...state, profile: action.profile}
             }
+        case "SET-STATUS": {
+            return {...state, userStatus: action.userStatus}
+        }
+        case "UPDATE-STATUS":
+            return {...state, userStatus: action.status}
         default:
             return state
     }
 }
 
-export const addPost = () : AddPostActionType => {
+export const addPost = (): AddPostActionType => {
     return {type: "ADD-POST"}
 }
 export const updateNewPostText = (text: string): UpdateNewPostTextType => {
     return {type: "UPDATE-NEW-POST-TEXT", newText: text}
 }
+export const setStatus = (userStatus: string) => {
+    return {type: "SET-STATUS", userStatus} as const
+}
+
+export const getStatus = (userID: string): AppThunk => async dispatch => {
+    let {data} = await profileAPI.getStatus(userID)
+    dispatch(setStatus(data))
+}
+// Update Status
+export const updateStatus = (status: string): AppThunk => async dispatch => {
+    let {data} = await profileAPI.updateStatus(status)
+    if (data.resultCode === 0) {
+        dispatch(setUpdateStatus(status))
+    }
+}
+export const setUpdateStatus = (status: string) => {
+    return {type: "UPDATE-STATUS", status} as const
+}
+
 
 export const getUserProfile = (userID: string): AppThunk => async dispatch => {
     let {data} = await usersAPI.getProfile(userID)
@@ -115,5 +147,6 @@ export const getUserProfile = (userID: string): AppThunk => async dispatch => {
 export const setUserProfile = (profile: ProfileType | null): SetUserProfileType => {
     return {type: "SET-USER-PROFILE", profile}
 }
+
 
 export default profilePageReducer

@@ -52,7 +52,8 @@ let initialState = {
     totalUserCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: [2]
+    followingInProgress: [2],
+    photoLarge: "https://cdn-icons-png.flaticon.com/512/149/149071.png"
 }
 
 
