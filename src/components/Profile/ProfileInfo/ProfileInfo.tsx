@@ -8,10 +8,12 @@ type ProfileInfoType = {
     userStatus: string
     updateStatus: (status: string) => void
     photoLarge: string
+
 }
 
 
 export const ProfileInfo: FC<ProfileInfoType> = ({profile, userStatus, updateStatus, photoLarge}) => {
+
 
     return (
         <div>

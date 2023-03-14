@@ -4,13 +4,14 @@ import {IconButton, TextField} from "@mui/material";
 import DoneIcon from '@mui/icons-material/Done';
 import EditIcon from '@mui/icons-material/Edit';
 
+
 type ProfileStatusType = {
     userStatus: string
     updateStatus: (status: string) => void
 }
 
-
 class ProfileStatus extends React.Component<ProfileStatusType> {
+
 
     state = {
         editMode: false,
@@ -36,15 +37,15 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
                 editMode: false
             })
     }
-
     editStatusOnChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         this.setState(
             {
                 userStatus: e.currentTarget.value
             })
     }
+
     componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<{}>, snapshot?: any) {
-        if(prevProps.userStatus !== this.props.userStatus) {
+        if (prevProps.userStatus !== this.props.userStatus) {
             this.setState({
                 userStatus: this.props.userStatus
             })

@@ -34,7 +34,7 @@ const Users: React.FC<UsersPropsType> = ({
     for (let i = 1; i <= pageCount; i++) {
         page.push(i);
     }
-    console.log(users[1])
+
     const unFollowOnClick = (userID: number) => {
         toggleFollowingInProgress(true, userID)
         usersAPI.unFollow(userID)

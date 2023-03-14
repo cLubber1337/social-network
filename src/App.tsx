@@ -24,7 +24,6 @@ function App() {
                 <Route path="/settings" component={Settings}/>
                 <Route path="/users" component={UsersContainer}/>
                 <Route path="/login" component={Login}/>
-
             </div>
     );
 }
