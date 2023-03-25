@@ -1,32 +1,10 @@
-export type FollowTypeAC = {
-    type: "FOLLOW"
-    userId: number
-}
-export type UnfollowTypeAC = {
-    type: "UNFOLLOW"
-    userId: number
-}
-export type SetCurrentPageTypeAC = {
-    type: "SET_CURRENT_PAGE"
-    currentPage: number
-}
-export type SetTotalUserCountTypeAC = {
-    type: "SET_TOTAL_USER_COUNT"
-    totalUsers: number
-}
-export type SetUsersTypeAC = {
-    type: "SET_USERS"
-    users: UsersType[]
-}
-export type isFetchingTypeAC = {
-    type: "TOGGLE_IS_FETCHING"
-    isFetching: boolean
-}
-export type followingInProgressTypeAC = {
-    type: "TOGGLE_FOLLOWING_IN_PROGRESS"
-    isFetching: boolean
-    userID: number
-}
+export type FollowTypeAC = ReturnType<typeof follow>
+export type UnfollowTypeAC = ReturnType<typeof unFollow>
+export type SetCurrentPageTypeAC = ReturnType<typeof setCurrentPage>
+export type SetTotalUserCountTypeAC = ReturnType<typeof setTotalUserCount>
+export type SetUsersTypeAC = ReturnType<typeof setUsers>
+export type isFetchingTypeAC = ReturnType<typeof toggleIsFetching>
+export type followingInProgressTypeAC = ReturnType<typeof toggleFollowingInProgress>
 
 
 type ActionType = SetCurrentPageTypeAC | FollowTypeAC | UnfollowTypeAC | SetUsersTypeAC | SetTotalUserCountTypeAC
@@ -83,16 +61,19 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionType
 
 }
 
-export const follow = (userId: number) => ({type: "FOLLOW", userId})
-export const unFollow = (userId: number) => ({type: "UNFOLLOW", userId})
-export const setUsers = (users: UsersType) => ({type: "SET_USERS", users})
-export const setCurrentPage = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage})
-export const setTotalUserCount = (totalUsers: number) => ({type: "SET_TOTAL_USER_COUNT", totalUsers})
-export const toggleIsFetching = (isFetching: boolean) => ({type: "TOGGLE_IS_FETCHING", isFetching})
+
+
+
+export const follow = (userId: number) => ({type: "FOLLOW", userId} as const)
+export const unFollow = (userId: number) => ({type: "UNFOLLOW", userId} as const )
+export const setUsers = (users: UsersType[]) => ({type: "SET_USERS", users} as const)
+export const setCurrentPage = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage} as const)
+export const setTotalUserCount = (totalUsers: number) => ({type: "SET_TOTAL_USER_COUNT", totalUsers} as const)
+export const toggleIsFetching = (isFetching: boolean) => ({type: "TOGGLE_IS_FETCHING", isFetching} as const)
 export const toggleFollowingInProgress = (isFetching: boolean, userID: number) => ({
     type: "TOGGLE_FOLLOWING_IN_PROGRESS",
     isFetching, userID
-})
+} as const)
 
 
 export default usersReducer

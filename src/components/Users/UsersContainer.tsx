@@ -40,7 +40,6 @@ type UsersPropsType = {
     followingInProgress: number[];
 };
 
-
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true);

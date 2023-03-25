@@ -1,47 +1,40 @@
 import React from 'react';
-import s from "./Dialogs.module.css"
+import style from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsType, MessagesType} from "../../redux/dialogsPage-reducer";
 import {Redirect} from "react-router-dom";
+import {reduxForm} from "redux-form";
+import {AddMessageForm, FormDataForAddMessageType} from "./AddMessageForm";
 
 type PropsType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
-    newMessageText: string
-    updateNewMessageText: (text: string) => void
-    addMessage: () => void
+    sendMessage: (newMessageBody: string) => void
     authMe: boolean
-
 }
 
 export const Dialogs: React.FC<PropsType> = ({
                                                  dialogs,
-                                                 updateNewMessageText,
-                                                 addMessage,
-                                                 newMessageText,
+                                                 sendMessage,
                                                  messages,
                                                  authMe
                                              }) => {
 
+    const addNewMessage = (formData: FormDataForAddMessageType) => {
+        sendMessage(formData.newMessageBody)
+    }
     if (!authMe) return <Redirect to={"/login"}/>
     return (
-        <div className={s.dialogs}>
-
-            <div className={s.dialogsItems}>
+        <div className={style.dialogs}>
+            <div className={style.dialogsItems}>
                 <DialogItem dialogs={dialogs}/>
             </div>
-
-
-            <div className={s.messages}>
-                <Message messages={messages}
-                         updateNewMessageText={updateNewMessageText}
-                         addMessage={addMessage}
-                         newMessageText={newMessageText as string}
-                />
+            <div className={style.messages}>
+                <Message messages={messages}/>
+                <AddMessageFormRedux onSubmit={addNewMessage}/>
             </div>
-
         </div>
     )
 }
-
+const AddMessageFormRedux = reduxForm<FormDataForAddMessageType>({form: "message"})(AddMessageForm)

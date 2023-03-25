@@ -4,9 +4,6 @@ import s from "./Header.module.css"
 import {NavLink} from "react-router-dom";
 import {AuthStateType} from "../../redux/auth-reducer";
 
-
-
-
 export const Header: FC<AuthStateType> = ({data, isAuth}) => {
 
     return (

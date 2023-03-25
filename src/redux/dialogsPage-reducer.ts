@@ -6,19 +6,12 @@ export type MessagesType = {
     id: number,
     message: string
 }
-type AddMessageActionType = {
-    type: "ADD-MESSAGE"
-}
-type UpdateNewMessageTextType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT"
-    newMessage: string
-}
-type ActionType = AddMessageActionType |  UpdateNewMessageTextType
-
-export type InitialStateType = typeof initialState
+type sendMessageActionType = ReturnType<typeof sendMessage>
+type ActionType = sendMessageActionType
+type InitialStateType = typeof initialState
 
 let initialState = {
-    newMessageText: "",
+    newMessageBody: "",
     dialogs: [
         {id: 1, name: "Andrey"},
         {id: 2, name: "Zina"},
@@ -26,7 +19,7 @@ let initialState = {
         {id: 4, name: "Igor"},
         {id: 5, name: "Henry"},
         {id: 6, name: "Nina"},
-    ] as DialogsType[] ,
+    ] as DialogsType[],
     messages: [
         {id: 1, message: "Hi!"},
         {id: 2, message: "How do you do?"},
@@ -38,25 +31,21 @@ let initialState = {
 }
 
 
-const dialogsPageReducer = (state:InitialStateType= initialState, action:ActionType ): InitialStateType => {
+const dialogsPageReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
 
     switch (action.type) {
-        case "ADD-MESSAGE":
-            let newMessage: MessagesType = {id: 6, message: state.newMessageText}
-            return {...state, messages: [...state.messages, newMessage],newMessageText: ""}
-        case "UPDATE-NEW-MESSAGE-TEXT":
-            return  {...state, newMessageText: action.newMessage}
+        case "SEND-MESSAGE": {
+            let newMessage: MessagesType = {id: 7, message: action.newMessageBody}
+            return {...state, messages: [...state.messages, newMessage]}
+        }
         default:
             return state
     }
 }
 
-export const addMessage: () => AddMessageActionType = () => {
-    return {type: "ADD-MESSAGE"}
+export const sendMessage = (newMessageBody: string) => {
+    return {type: "SEND-MESSAGE", newMessageBody} as const
 }
 
-export const updateNewMessageText: (text: string) => UpdateNewMessageTextType = (text: string) => {
-    return {type: "UPDATE-NEW-MESSAGE-TEXT", newMessage: text}
-}
 
 export default dialogsPageReducer

@@ -4,7 +4,6 @@ import styles from "./Login.module.css"
 import {reduxForm} from "redux-form";
 import {FormDataType, LoginForm} from "./LoginForm";
 
-
 export const Login = () => {
     const onSubmit = (formData: FormDataType) => {
         console.log(formData)

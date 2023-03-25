@@ -1,39 +1,30 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {PostType} from "../../../redux/profilePage-reducer";
-
+import {reduxForm} from "redux-form";
+import {FormDataForPostType, PostForm} from "./PostForm";
 
 type PropsType = {
     posts: PostType[]
-    newPostText: string
-    addPost: () => void
-    onPostChange: (text: string) => void
+    addPost: (post: string) => void
 }
 
-export const MyPosts: React.FC<PropsType> = ({posts, newPostText, addPost, onPostChange}) => {
+export const MyPosts: React.FC<PropsType> = ({posts, addPost}) => {
 
-    const onClickAddPost = () => {
-        addPost()
-    }
-
-    let onChangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        onPostChange(e.currentTarget.value)
+    const onAddPost = (formData: FormDataForPostType) => {
+        addPost(formData.post)
     }
 
     return (
         <div className={s.content}>
             <h3>MY POSTS</h3>
             <div>
-                <textarea
-                    onChange={onChangePost}
-                    value={newPostText}
-                />
-                <div>
-                    <button onClick={onClickAddPost}>Add post</button>
-                </div>
+                <PostReduxForm onSubmit={onAddPost}/>
             </div>
             <Post posts={posts}/>
         </div>
     )
 }
+
+const PostReduxForm = reduxForm<FormDataForPostType>({form: "post"})(PostForm)

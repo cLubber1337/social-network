@@ -46,7 +46,6 @@ const Users: React.FC<UsersPropsType> = ({
             });
     };
 
-
     const followOnClick = (userID: number) => {
         toggleFollowingInProgress(true, userID)
         usersAPI.follow(userID)
@@ -92,7 +91,6 @@ const Users: React.FC<UsersPropsType> = ({
                                 className={style.button}
                                 onClick={() => followOnClick(user.id)}
                                 disabled={followingInProgress.some(id => id === user.id)}
-
                             >
                                 Follow
                             </Button>

@@ -3,6 +3,13 @@ import {AppThunk} from "./store";
 
 type setCurrentStatusACType = ReturnType<typeof setStatus>
 type setUpdateStatusACType = ReturnType<typeof setUpdateStatus>
+type AddPostActionType = ReturnType<typeof addPost>
+type SetUserProfileType = ReturnType<typeof setUserProfile>
+type ActionTypes =
+    AddPostActionType
+    | SetUserProfileType
+    | setCurrentStatusACType
+    | setUpdateStatusACType
 
 export type PostsType = {
     id: number,
@@ -37,30 +44,9 @@ export type ProfileType = {
         large: string | undefined
     }
 }
-
-export type AddPostActionType = {
-    type: "ADD-POST"
-}
-export type UpdateNewPostTextType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
-}
-export type SetUserProfileType = {
-    type: "SET-USER-PROFILE"
-    profile: ProfileType | null
-}
-
-type ActionTypes =
-    AddPostActionType
-    | UpdateNewPostTextType
-    | SetUserProfileType
-    | setCurrentStatusACType
-    | setUpdateStatusACType
-
 export type InitialStateType = typeof initialState
 
 let initialState = {
-    newPostText: "",
     postsData: [
         {
             id: 1,
@@ -90,13 +76,11 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
         case "ADD-POST":
             let newPost: PostsType = {
                 id: 4,
-                text: state.newPostText,
+                text: action.post,
                 photo: "https://img.freepik.com/free-vector/korean-drawing-style-character-design_52683-92286.jpg?w=826&t=st=1671760295~exp=1671760895~hmac=a9c8ddfc28e01fc5e416f6f10e1e3db6b696cbf23900fd1c9fb313b6a4612ac8",
                 like: 777
             }
-            return {...state, postsData: [newPost, ...state.postsData], newPostText: ""}
-        case "UPDATE-NEW-POST-TEXT":
-            return {...state, newPostText: action.newText}
+            return {...state, postsData: [newPost, ...state.postsData]}
         case "SET-USER-PROFILE":
             if (action.profile === null) {
                 return state
@@ -113,40 +97,24 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
     }
 }
 
-export const addPost = (): AddPostActionType => {
-    return {type: "ADD-POST"}
+export const addPost = (post: string) => ({type: "ADD-POST", post} as const)
+export const setStatus = (userStatus: string) => ({type: "SET-STATUS", userStatus} as const)
+export const setUpdateStatus = (status: string) => ({type: "UPDATE-STATUS", status} as const)
+export const setUserProfile = (profile: ProfileType | null) => ({type: "SET-USER-PROFILE", profile} as const)
+//thunks
+export const getUserProfile = (userID: string): AppThunk => async dispatch => {
+    let {data} = await usersAPI.getProfile(userID)
+    dispatch(setUserProfile(data))
 }
-export const updateNewPostText = (text: string): UpdateNewPostTextType => {
-    return {type: "UPDATE-NEW-POST-TEXT", newText: text}
-}
-export const setStatus = (userStatus: string) => {
-    return {type: "SET-STATUS", userStatus} as const
-}
-
-export const getStatus = (userID: string): AppThunk => async dispatch => {
-    let {data} = await profileAPI.getStatus(userID)
-    dispatch(setStatus(data))
-}
-// Update Status
 export const updateStatus = (status: string): AppThunk => async dispatch => {
     let {data} = await profileAPI.updateStatus(status)
     if (data.resultCode === 0) {
         dispatch(setUpdateStatus(status))
     }
 }
-export const setUpdateStatus = (status: string) => {
-    return {type: "UPDATE-STATUS", status} as const
+export const getStatus = (userID: string): AppThunk => async dispatch => {
+    let {data} = await profileAPI.getStatus(userID)
+    dispatch(setStatus(data))
 }
-
-
-export const getUserProfile = (userID: string): AppThunk => async dispatch => {
-    let {data} = await usersAPI.getProfile(userID)
-    dispatch(setUserProfile(data))
-}
-
-export const setUserProfile = (profile: ProfileType | null): SetUserProfileType => {
-    return {type: "SET-USER-PROFILE", profile}
-}
-
 
 export default profilePageReducer
