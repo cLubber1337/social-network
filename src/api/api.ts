@@ -11,7 +11,6 @@ export const usersAPI = {
         return instance
             .get(
                 `/users?page=${currentPage}&count=${pageSize}`,
-                {withCredentials: true}
             ).then(res => res.data)
     },
     getProfile: (userID: string) => {
@@ -28,9 +27,15 @@ export const usersAPI = {
 }
 export const authAPI = {
     me: () => {
-        return instance
-            .get("auth/me")
-    }
+        return instance.get("auth/me")
+    },
+    loggIn: (email: string, password: string, rememberMe: boolean = false) => {
+        return instance.post("/auth/login", {email, password, rememberMe})
+    },
+    loggOut: () => {
+        return instance.delete("/auth/login")
+    },
+
 }
 export const profileAPI = {
     getProfile: (userID: string) => {

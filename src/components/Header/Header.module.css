@@ -13,9 +13,16 @@
 }
 
 .loginBlock {
-    padding-right: 50px;
+    display: flex;
+    justify-content: flex-end;
 }
 .loginLink {
     color: white;
-    text-decoration: none
+    text-decoration: none;
+    padding-right: 50px;
+}
+.logoutLink {
+    color: white;
+    text-decoration: none;
+    padding-right: 50px;
 }

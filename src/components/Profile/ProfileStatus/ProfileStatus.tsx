@@ -12,7 +12,6 @@ type ProfileStatusType = {
 
 class ProfileStatus extends React.Component<ProfileStatusType> {
 
-
     state = {
         editMode: false,
         userStatus: this.props.userStatus
@@ -50,7 +49,6 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
                 userStatus: this.props.userStatus
             })
         }
-
     }
 
     render() {

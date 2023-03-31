@@ -1,0 +1,33 @@
+.formControl {
+    border: 2px solid rgba(4, 99, 128, 0.4);
+}
+.formControl:focus {
+    border-color: rgba(4, 99, 128, 0.9);
+    outline: none;
+}
+.formControl.error {
+    border-color: red;
+}
+
+
+
+.input {
+    width: 250px;
+    margin-top: 20px;
+    height: 30px;
+    border: 2px solid rgba(4, 99, 128, 0.4);
+    border-radius: 5px;
+}
+
+.input:focus {
+    border-color: rgba(4, 99, 128, 0.9);
+    outline: none;
+}
+
+.input.error {
+    border-color: red;
+}
+.errorText {
+    color: red;
+    font-size: 12px;
+}

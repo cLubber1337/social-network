@@ -11,7 +11,6 @@ type ActionType = sendMessageActionType
 type InitialStateType = typeof initialState
 
 let initialState = {
-    newMessageBody: "",
     dialogs: [
         {id: 1, name: "Andrey"},
         {id: 2, name: "Zina"},
@@ -30,7 +29,6 @@ let initialState = {
     ] as MessagesType[]
 }
 
-
 const dialogsPageReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
 
     switch (action.type) {
@@ -43,9 +41,6 @@ const dialogsPageReducer = (state: InitialStateType = initialState, action: Acti
     }
 }
 
-export const sendMessage = (newMessageBody: string) => {
-    return {type: "SEND-MESSAGE", newMessageBody} as const
-}
-
+export const sendMessage = (newMessageBody: string) => ({type: "SEND-MESSAGE", newMessageBody} as const)
 
 export default dialogsPageReducer

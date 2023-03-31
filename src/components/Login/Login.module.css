@@ -13,16 +13,17 @@
     align-items: center;
 }
 
-.login {
+.input {
     width: 250px;
     margin-top: 20px;
     height: 30px;
+    border: 2px solid rgba(4, 99, 128, 0.4);
+    border-radius: 5px;
 }
 
-.password {
-    margin-top: 20px;
-    width: 250px;
-    height: 30px;
+.input:focus {
+    border-color: rgba(4, 99, 128, 0.9);
+    outline: none;
 }
 
 .checkbox {

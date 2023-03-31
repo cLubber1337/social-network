@@ -1,7 +1,8 @@
-import {AppThunk} from "./store";
-import {authAPI} from "../api/api";
+import {AppStateType, AppThunk} from "./store";
+import {authAPI} from "api/api";
+import {stopSubmit} from "redux-form";
 
-type setUserDataTypeAC = ReturnType<typeof setUserData>
+type setUserDataTypeAC = ReturnType<typeof setAuthUserData>
 type setAuthTypeAC = ReturnType<typeof setAuth>
 type ActionType = setUserDataTypeAC | setAuthTypeAC;
 
@@ -19,7 +20,7 @@ type InitialStateType = typeof initialState;
 let initialState: AuthStateType = {
     data: {
         id: null,
-        email: "email@gmail.com",
+        email: null,
         login: null,
     },
     isAuth: false,
@@ -36,15 +37,37 @@ const authReducer = (state: InitialStateType = initialState, action: ActionType)
     }
 };
 
-export const setUserData = (data: AuthDataType) => ({type: "SET_USER_DATA", data} as const)
+export const setAuthUserData = (data: AuthDataType) => ({type: "SET_USER_DATA", data} as const)
 export const setAuth = (isAuth: boolean) => ({type: "SET_AUTH", isAuth} as const)
 
 export const getAuthUserData = (): AppThunk => async dispatch => {
     let {data} = await authAPI.me()
     if (data.resultCode === 0) {
-        dispatch(setUserData(data))
+        dispatch(setAuthUserData(data))
         dispatch(setAuth(true))
     }
 }
+
+export const login = (login: string, password: string, rememberMe: boolean): AppThunk => async dispatch => {
+    let {data} = await authAPI.loggIn(login, password, rememberMe)
+    if (data.resultCode === 0) {
+        dispatch(getAuthUserData())
+        dispatch(setAuth(true))
+    } else {
+        let action = stopSubmit("login", {email: "Email is wrong"})
+        dispatch(action)
+    }
+}
+export const logout = (): AppThunk => async dispatch => {
+    let {data} = await authAPI.loggOut()
+    if (data.resultCode === 0) {
+        dispatch(setAuthUserData(data))
+        dispatch(setAuth(false))
+    }
+}
+
+export const getIsAuth = (state: AppStateType) => state.authorization.isAuth
+export const getAuthData = (state: AppStateType) => state.authorization.data
+
 
 export default authReducer;

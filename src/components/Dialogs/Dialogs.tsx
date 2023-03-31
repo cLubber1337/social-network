@@ -2,8 +2,7 @@ import React from 'react';
 import style from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsType, MessagesType} from "../../redux/dialogsPage-reducer";
-import {Redirect} from "react-router-dom";
+import {DialogsType, MessagesType} from "redux/dialogsPage-reducer";
 import {reduxForm} from "redux-form";
 import {AddMessageForm, FormDataForAddMessageType} from "./AddMessageForm";
 
@@ -18,13 +17,12 @@ export const Dialogs: React.FC<PropsType> = ({
                                                  dialogs,
                                                  sendMessage,
                                                  messages,
-                                                 authMe
                                              }) => {
 
     const addNewMessage = (formData: FormDataForAddMessageType) => {
         sendMessage(formData.newMessageBody)
     }
-    if (!authMe) return <Redirect to={"/login"}/>
+    // if (!authMe) return <Redirect to={"/login"}/>
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>
@@ -37,4 +35,4 @@ export const Dialogs: React.FC<PropsType> = ({
         </div>
     )
 }
-const AddMessageFormRedux = reduxForm<FormDataForAddMessageType>({form: "message"})(AddMessageForm)
+const AddMessageFormRedux = reduxForm<FormDataForAddMessageType>({form: "newMessageBody"})(AddMessageForm)
