@@ -38,6 +38,7 @@ export const LoginForm: FC<InjectedFormProps<FormDataType>> = (props) => {
                     Remember Me
                 </div>
             </div>
+            {props.error && <div className={styles.commonError}>{props.error}</div>}
             <button className={styles.button}>
                 LOGIN
             </button>

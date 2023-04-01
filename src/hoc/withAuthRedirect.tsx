@@ -1,7 +1,7 @@
 import React, {ComponentType, FC} from 'react';
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {AppStateType} from "../redux/store";
+import {AppStateType} from "redux/store";
 
 type mapStateToPropsType = {
     isAuth: boolean
@@ -18,10 +18,8 @@ export function withAuthRedirect<T>(Component: ComponentType<T>) {
         if (!isAuth) return <Redirect to={"/login"}/>
         return <Component  {...restProps as T}/>
     }
-    let ConnectedRedirectComponent = connect(mapStateToProps)(RedirectComponent)
     return connect(mapStateToProps)(RedirectComponent)
 
-
-};
+}
 
 export default withAuthRedirect;

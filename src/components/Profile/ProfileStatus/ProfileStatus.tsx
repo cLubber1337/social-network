@@ -33,8 +33,18 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
     onBlurMode = () => {
         this.setState(
             {
-                editMode: false
+                editMode: false,
+                userStatus: this.props.userStatus
             })
+    }
+    onKeyEnter = (event: string) => {
+        if (event === "Enter") {
+            this.setState(
+                {
+                    editMode: false
+                })
+            this.props.updateStatus(this.state.userStatus)
+        }
     }
     editStatusOnChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         this.setState(
@@ -56,9 +66,11 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
             <div className={s.content}>
                 {!this.state.editMode &&
                     <div>
+
                 <span className={s.statusText}>
                     {this.props.userStatus}
                 </span>
+
                         <IconButton
                             color={"primary"}
                             sx={{mb: "10px", ml: "5px"}}
@@ -68,6 +80,7 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
                                 fontSize={"small"}
                             />
                         </IconButton>
+
                     </div>
                 }
                 {this.state.editMode &&
@@ -75,17 +88,18 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
                         <TextField
                             id="outlined-helperText"
                             autoFocus
-                            // defaultValue={this.props.userStatus}
                             value={this.state.userStatus}
                             size={"small"}
                             sx={{width: "600px"}}
                             onChange={this.editStatusOnChange}
+                            onBlur={this.onBlurMode}
+                            onKeyDown={(event)=>this.onKeyEnter(event.code)}
                         />
                         <IconButton
                             size={"small"}
                             color={"default"}
                             sx={{mt: "3px"}}
-                            onClick={this.deactivateEditMode}
+                            onMouseDown={this.deactivateEditMode}
                         >
                             <DoneIcon
                                 fontSize={"medium"}

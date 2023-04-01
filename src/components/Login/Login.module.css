@@ -73,5 +73,9 @@
     margin-top: 20px;
     width: 256px;
 }
+.commonError {
+    padding: 5px;
+    color: red;
+}
 
 

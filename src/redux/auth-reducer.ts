@@ -1,6 +1,7 @@
 import {AppStateType, AppThunk} from "./store";
 import {authAPI} from "api/api";
 import {stopSubmit} from "redux-form";
+import {Dispatch} from "redux";
 
 type setUserDataTypeAC = ReturnType<typeof setAuthUserData>
 type setAuthTypeAC = ReturnType<typeof setAuth>
@@ -40,12 +41,14 @@ const authReducer = (state: InitialStateType = initialState, action: ActionType)
 export const setAuthUserData = (data: AuthDataType) => ({type: "SET_USER_DATA", data} as const)
 export const setAuth = (isAuth: boolean) => ({type: "SET_AUTH", isAuth} as const)
 
-export const getAuthUserData = (): AppThunk => async dispatch => {
-    let {data} = await authAPI.me()
-    if (data.resultCode === 0) {
-        dispatch(setAuthUserData(data))
-        dispatch(setAuth(true))
-    }
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+    return authAPI.me()
+        .then(({data}) => {
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData(data))
+            dispatch(setAuth(true))
+        }
+    })
 }
 
 export const login = (login: string, password: string, rememberMe: boolean): AppThunk => async dispatch => {
@@ -54,8 +57,8 @@ export const login = (login: string, password: string, rememberMe: boolean): App
         dispatch(getAuthUserData())
         dispatch(setAuth(true))
     } else {
-        let action = stopSubmit("login", {email: "Email is wrong"})
-        dispatch(action)
+        let message = data.messages.length > 0 ? data.messages[0] : "some error"
+        dispatch(stopSubmit("login", {_error: message}))
     }
 }
 export const logout = (): AppThunk => async dispatch => {
