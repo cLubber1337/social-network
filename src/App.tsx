@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {NavBar} from "components/NavBar/NavBar";
-import {Redirect, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {News} from "components/News/News";
 import {Music} from "components/Music/Music";
 import {Settings} from "components/Settings/Settings";
@@ -36,7 +36,7 @@ const App = () => {
             <Route path="/settings" component={Settings}/>
             <Route path="/users" component={UsersContainer}/>
             <Route path="/login" component={Login}/>
-            <Route path="/" exact render={() => <Redirect to="/profile/:userID?" />} />
+            <Route path="/" exact component={ProfileContainer}/>
         </div>
     );
 }
