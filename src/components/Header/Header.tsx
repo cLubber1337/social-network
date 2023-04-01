@@ -12,7 +12,6 @@ export const Header = () => {
             <div className={s.loginBlock}>
                 <LoginMenu/>
             </div>
-
         </div>
     )
 }

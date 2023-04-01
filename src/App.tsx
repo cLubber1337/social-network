@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {NavBar} from "components/NavBar/NavBar";
 import {Route} from "react-router-dom";
@@ -19,11 +19,11 @@ const App = () => {
     const dispatch = useDispatch()
     const initialized = useSelector(getInitialized)
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(initialize())
     }, [])
 
-    if (!initialized) return <div className={"preloader"} ><Preloader/></div>
+    if (!initialized) return <div className={"preloader"}><Preloader/></div>
 
     return (
         <div className="app-wrapper">
