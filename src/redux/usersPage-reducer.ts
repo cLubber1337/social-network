@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "api/api";
+
 export type FollowTypeAC = ReturnType<typeof follow>
 export type UnfollowTypeAC = ReturnType<typeof unFollow>
 export type SetCurrentPageTypeAC = ReturnType<typeof setCurrentPage>
@@ -42,7 +45,7 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionType
         case "UNFOLLOW":
             return {...state, items: state.items.map(u => u.id === action.userId ? {...u, followed: false} : u)}
         case "SET_USERS":
-            return {...state, items: [...action.users]}
+            return {...state, items: [...action.items]}
         case "SET_CURRENT_PAGE":
             return {...state, currentPage: action.currentPage}
         case "SET_TOTAL_USER_COUNT":
@@ -58,12 +61,11 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionType
         default:
             return state
     }
-
 }
 
 export const follow = (userId: number) => ({type: "FOLLOW", userId} as const)
 export const unFollow = (userId: number) => ({type: "UNFOLLOW", userId} as const )
-export const setUsers = (users: UsersType[]) => ({type: "SET_USERS", users} as const)
+export const setUsers = (items: UsersType[]) => ({type: "SET_USERS", items} as const)
 export const setCurrentPage = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage} as const)
 export const setTotalUserCount = (totalUsers: number) => ({type: "SET_TOTAL_USER_COUNT", totalUsers} as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: "TOGGLE_IS_FETCHING", isFetching} as const)
@@ -72,5 +74,14 @@ export const toggleFollowingInProgress = (isFetching: boolean, userID: number) =
     isFetching, userID
 } as const)
 
+export const requestUsers = (currentPage: number, pageSize: number ) => (dispatch: Dispatch) => {
+    dispatch(setCurrentPage(currentPage))
+    dispatch(toggleIsFetching(true))
+    usersAPI.getUsers(currentPage, pageSize)
+        .then((data) => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items));
+        });
+}
 
 export default usersReducer

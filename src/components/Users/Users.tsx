@@ -1,9 +1,10 @@
 import React from "react";
 import style from "./Users.module.css";
-import {UsersType} from "../../redux/usersPage-reducer";
+import {requestUsers, UsersType} from "redux/usersPage-reducer";
 import {NavLink} from "react-router-dom";
 import {Pagination, Button, Avatar} from "@mui/material";
-import {usersAPI} from "../../api/api";
+import {usersAPI} from "api/api";
+import {useDispatch} from "react-redux";
 
 
 type UsersPropsType = {
@@ -13,7 +14,6 @@ type UsersPropsType = {
     pageSize: number;
     totalUserCount: number;
     currentPage: number;
-    onClickPageChanged: (currentPage: number) => void;
     toggleFollowingInProgress: (isFetching: boolean, userID: number) => void;
     followingInProgress: number[]
 };
@@ -25,10 +25,10 @@ const Users: React.FC<UsersPropsType> = ({
                                              currentPage,
                                              totalUserCount,
                                              pageSize,
-                                             onClickPageChanged,
                                              toggleFollowingInProgress,
                                              followingInProgress
                                          }) => {
+    const dispatch = useDispatch()
     let pageCount = Math.ceil(totalUserCount / pageSize);
     let page = [];
     for (let i = 1; i <= pageCount; i++) {
@@ -56,6 +56,10 @@ const Users: React.FC<UsersPropsType> = ({
                 toggleFollowingInProgress(false, userID)
             });
     };
+
+    const onClickPageChanged1 = (currPage: number) => {
+        dispatch(requestUsers(currPage, pageSize))
+    }
 
     return (
         <div className={style.content}>
@@ -116,7 +120,7 @@ const Users: React.FC<UsersPropsType> = ({
                         count={pageCount}
                         color="primary"
                         page={currentPage}
-                        onChange={(_, num) => onClickPageChanged(num)}
+                        onChange={(_, num) => onClickPageChanged1(num)}
                     />
                 </div>
 

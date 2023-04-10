@@ -25,7 +25,6 @@ export const initialize = (): AppThunk => dispatch => {
     promise.then(() => {
         dispatch(initializedSuccess())
     })
-
 }
 
 

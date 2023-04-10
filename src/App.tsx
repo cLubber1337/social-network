@@ -23,8 +23,8 @@ const App = () => {
         dispatch(initialize())
     }, [])
 
-    if (!initialized) return <div className={"preloader"}><Preloader/></div>
 
+    if (!initialized) return <div className={"preloader"}><Preloader/></div>
     return (
         <div className="app-wrapper">
             <Header/>

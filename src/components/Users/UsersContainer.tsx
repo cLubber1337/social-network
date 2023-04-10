@@ -1,6 +1,6 @@
 import React, {ComponentType} from "react";
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/store";
+import {AppStateType} from "redux/store";
 import {
     follow,
     toggleIsFetching,
@@ -9,10 +9,10 @@ import {
     setUsers,
     unFollow,
     UsersType, toggleFollowingInProgress,
-} from "../../redux/usersPage-reducer";
+} from "redux/usersPage-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader";
-import {usersAPI} from "../../api/api";
+import {usersAPI} from "api/api";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {
@@ -36,7 +36,7 @@ type UsersPropsType = {
     users: UsersType[];
     follow: (userId: number) => void;
     unFollow: (userId: number) => void;
-    setUsers: (users: UsersType) => void;
+    setUsers: (users: UsersType[]) => void;
     setCurrentPage: (page: number) => void;
     setTotalUserCount: (totalCount: number) => void;
     toggleIsFetching: (isFetching: boolean) => void;
@@ -58,16 +58,9 @@ class UsersContainer extends React.Component<UsersPropsType> {
                 this.props.setTotalUserCount(data.totalCount);
             });
     }
-
-    onClickPageChanged = (currentPage: number) => {
-        this.props.setCurrentPage(currentPage);
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(currentPage, this.props.pageSize)
-            .then((data) => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items);
-            });
-    };
+    componentWillUnmount() {
+        this.props.setCurrentPage(1)
+    }
 
     render() {
         return (
@@ -83,7 +76,6 @@ class UsersContainer extends React.Component<UsersPropsType> {
                         totalUserCount={this.props.totalUserCount}
                         currentPage={this.props.currentPage}
                         followingInProgress={this.props.followingInProgress}
-                        onClickPageChanged={this.onClickPageChanged}
                         toggleFollowingInProgress={this.props.toggleFollowingInProgress}
                     />
                 )}

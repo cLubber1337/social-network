@@ -3,11 +3,15 @@ import s from "./ProfileStatus.module.css"
 import {IconButton, TextField} from "@mui/material";
 import DoneIcon from '@mui/icons-material/Done';
 import EditIcon from '@mui/icons-material/Edit';
+import {AuthDataType} from "redux/auth-reducer";
+import {ProfileType} from "redux/profilePage-reducer";
 
 
 type ProfileStatusType = {
     userStatus: string
     updateStatus: (status: string) => void
+    authData: AuthDataType
+    userProfile: ProfileType | null
 }
 
 class ProfileStatus extends React.Component<ProfileStatusType> {
@@ -70,8 +74,7 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
                 <span className={s.statusText}>
                     {this.props.userStatus}
                 </span>
-
-                        <IconButton
+                        {this.props.authData.id === this.props.userProfile?.userId && <IconButton
                             color={"primary"}
                             sx={{mb: "10px", ml: "5px"}}
                             onClick={this.activateEditMode}
@@ -79,8 +82,7 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
                             <EditIcon
                                 fontSize={"small"}
                             />
-                        </IconButton>
-
+                        </IconButton>}
                     </div>
                 }
                 {this.state.editMode &&
@@ -93,7 +95,7 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
                             sx={{width: "600px"}}
                             onChange={this.editStatusOnChange}
                             onBlur={this.onBlurMode}
-                            onKeyDown={(event)=>this.onKeyEnter(event.code)}
+                            onKeyDown={(event) => this.onKeyEnter(event.code)}
                         />
                         <IconButton
                             size={"small"}

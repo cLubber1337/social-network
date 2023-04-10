@@ -1,5 +1,5 @@
-import {profileAPI, usersAPI} from "../api/api";
-import {AppThunk} from "./store";
+import {profileAPI, usersAPI} from "api/api";
+import {AppStateType, AppThunk} from "./store";
 
 type setCurrentStatusACType = ReturnType<typeof setStatus>
 type setUpdateStatusACType = ReturnType<typeof setUpdateStatus>
@@ -116,5 +116,10 @@ export const getStatus = (userID: string): AppThunk => async dispatch => {
     let {data} = await profileAPI.getStatus(userID)
     dispatch(setStatus(data))
 }
+
+
+export const getCurrentUserProfile = (state: AppStateType) => state.profilePage.profile
+
+
 
 export default profilePageReducer

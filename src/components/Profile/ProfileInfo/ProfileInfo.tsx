@@ -1,34 +1,41 @@
 import React, {FC} from 'react';
 import s from "./ProfileInfo.module.css"
-import {ProfileType} from "../../../redux/profilePage-reducer";
+import {getCurrentUserProfile} from "redux/profilePage-reducer";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
+import {useSelector} from "react-redux";
+import {getAuthData} from "redux/auth-reducer";
 
 type ProfileInfoType = {
-    profile: ProfileType | null
     userStatus: string
     updateStatus: (status: string) => void
     photoLarge: string
 
+
 }
 
 
-export const ProfileInfo: FC<ProfileInfoType> = ({profile, userStatus, updateStatus, photoLarge}) => {
-
+export const ProfileInfo: FC<ProfileInfoType> = ({userStatus, updateStatus, photoLarge}) => {
+    const userProfile = useSelector(getCurrentUserProfile)
+    const authData = useSelector(getAuthData)
 
     return (
         <div>
             <div className={s.content}>
-
                 <div>
-                    {profile !== null ?
-                        <img className={s.profileImg} src={profile.photos.small !== null ?
-                            profile.photos.small: photoLarge}
+                    {userProfile !== null &&
+                        <img className={s.profileImg} src={userProfile.photos.small !== null ?
+                            userProfile.photos.small: photoLarge}
                              alt="imageUser"/>
-                        : ""
                     }
                 </div>
 
-                <ProfileStatus userStatus={userStatus} updateStatus={updateStatus}/>
+                <ProfileStatus
+                    userStatus={userStatus}
+                    updateStatus={updateStatus}
+                    userProfile={userProfile}
+                    authData={authData}
+
+                />
             </div>
         </div>)
 }
