@@ -1,15 +1,17 @@
 import {Field, InjectedFormProps} from "redux-form";
-import React, {FC} from "react";
+import React from "react";
 import {maxLengthCreator, requiredField} from "utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
+import {Button} from "@mui/material";
 
 export type FormDataForPostType = {
     post: string
 }
 
-const maxLength = maxLengthCreator(10)
+const maxLength = maxLengthCreator(30)
 
-export const PostForm: FC<InjectedFormProps<FormDataForPostType>> = (props) => {
+export const PostForm = (props: InjectedFormProps<FormDataForPostType>) => {
+
     return (
         <form onSubmit={props.handleSubmit}>
             <Field
@@ -18,7 +20,8 @@ export const PostForm: FC<InjectedFormProps<FormDataForPostType>> = (props) => {
                 component={Textarea}
                 validate={[requiredField, maxLength]}
             />
-            <button>ADD POST</button>
+
+            <Button style={{marginTop: "5px"}} variant="contained">ADD POST</Button>
         </form>
     )
 }

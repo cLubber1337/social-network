@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useEffect} from 'react';
+import React, {ChangeEvent, memo, useEffect} from 'react';
 import s from "./ProfileStatus.module.css"
 import {IconButton, TextField} from "@mui/material";
 import DoneIcon from '@mui/icons-material/Done';
@@ -14,7 +14,7 @@ type ProfileStatusType = {
     userProfile: ProfileType | null
 }
 
-const ProfileStatus: FC<ProfileStatusType> = ({userStatus, updateStatus, authData, userProfile}) => {
+const ProfileStatus = memo(({userStatus, updateStatus, authData, userProfile}: ProfileStatusType) => {
     const [editMode, setEditMode] = React.useState(false)
     const [status, setStatus] = React.useState(userStatus)
 
@@ -84,7 +84,7 @@ const ProfileStatus: FC<ProfileStatusType> = ({userStatus, updateStatus, authDat
                 </div>}
         </div>
     );
-}
+})
 
 
 export default ProfileStatus;

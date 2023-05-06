@@ -12,6 +12,9 @@
     text-decoration: none;
     width: 100%;
 }
+.NavBar ul a {
+    text-decoration: none;
+}
 
 .item {
     cursor: pointer;

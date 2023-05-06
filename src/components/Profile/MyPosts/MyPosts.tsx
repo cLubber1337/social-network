@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {PostType} from "../../../redux/profilePage-reducer";
+import {PostType} from "redux/profilePage-reducer";
 import {reduxForm} from "redux-form";
 import {FormDataForPostType, PostForm} from "./PostForm";
 
@@ -10,15 +10,14 @@ type PropsType = {
     addPost: (post: string) => void
 }
 
-export const MyPosts: React.FC<PropsType> = ({posts, addPost}) => {
-
+export const MyPosts = ({posts, addPost} : PropsType) => {
     const onAddPost = (formData: FormDataForPostType) => {
         addPost(formData.post)
     }
 
     return (
         <div className={s.content}>
-            <h3>MY POSTS</h3>
+            <h3>My posts</h3>
             <div>
                 <PostReduxForm onSubmit={onAddPost}/>
             </div>
@@ -26,5 +25,6 @@ export const MyPosts: React.FC<PropsType> = ({posts, addPost}) => {
         </div>
     )
 }
+
 
 const PostReduxForm = reduxForm<FormDataForPostType>({form: "post"})(PostForm)

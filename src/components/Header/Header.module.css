@@ -1,17 +1,15 @@
 .header {
     display: flex;
     align-items: center;
+    padding: 20px 50px;
     justify-content: space-between;
     background-color: #046380;
     grid-area: h;
     border-bottom: 2px solid rgba(255, 255, 255, .09);
-
 }
-
 .logo {
-    padding-left: 200px;
+    margin-left: 150px;
 }
-
 .loginBlock {
     display: flex;
     justify-content: flex-end;

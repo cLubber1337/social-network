@@ -9,5 +9,7 @@
     box-shadow: 0 0 4px 1px #046380;
 }
 .content h3 {
-    margin: 0;
+    font-family: Roboto, sans-serif;
+    text-align: center;
+    color: #065062;
 }
