@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, FC, useEffect} from 'react';
 import s from "./ProfileStatus.module.css"
 import {IconButton, TextField} from "@mui/material";
 import DoneIcon from '@mui/icons-material/Done';
@@ -14,105 +14,77 @@ type ProfileStatusType = {
     userProfile: ProfileType | null
 }
 
-class ProfileStatus extends React.Component<ProfileStatusType> {
+const ProfileStatus: FC<ProfileStatusType> = ({userStatus, updateStatus, authData, userProfile}) => {
+    const [editMode, setEditMode] = React.useState(false)
+    const [status, setStatus] = React.useState(userStatus)
 
-    state = {
-        editMode: false,
-        userStatus: this.props.userStatus
+    const activateEditMode = () => {
+        setEditMode(true)
     }
-
-    activateEditMode = () => {
-        this.setState(
-            {
-                editMode: true
-            })
+    const deactivateEditMode = () => {
+        setEditMode(false)
+        updateStatus(status)
     }
-    deactivateEditMode = () => {
-        this.setState(
-            {
-                editMode: false
-            })
-        this.props.updateStatus(this.state.userStatus)
+    const onBlurMode = () => {
+        setEditMode(true)
+        setStatus(userStatus)
     }
-    onBlurMode = () => {
-        this.setState(
-            {
-                editMode: false,
-                userStatus: this.props.userStatus
-            })
-    }
-    onKeyEnter = (event: string) => {
+    const onKeyEnter = (event: string) => {
         if (event === "Enter") {
-            this.setState(
-                {
-                    editMode: false
-                })
-            this.props.updateStatus(this.state.userStatus)
+            setEditMode(false)
+            updateStatus(status)
         }
     }
-    editStatusOnChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        this.setState(
-            {
-                userStatus: e.currentTarget.value
-            })
+    const editStatusOnChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setStatus(e.currentTarget.value)
     }
+    useEffect(() => {
+        setStatus(userStatus)
+    }, [userStatus])
 
-    componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<{}>, snapshot?: any) {
-        if (prevProps.userStatus !== this.props.userStatus) {
-            this.setState({
-                userStatus: this.props.userStatus
-            })
-        }
-    }
 
-    render() {
-        return (
-            <div className={s.content}>
-                {!this.state.editMode &&
-                    <div>
-
+    return (
+        <div className={s.content}>
+            {!editMode &&
+                <div>
                 <span className={s.statusText}>
-                    {this.props.userStatus}
+                    {userStatus}
                 </span>
-                        {this.props.authData.id === this.props.userProfile?.userId && <IconButton
-                            color={"primary"}
-                            sx={{mb: "10px", ml: "5px"}}
-                            onClick={this.activateEditMode}
-                        >
-                            <EditIcon
-                                fontSize={"small"}
-                            />
-                        </IconButton>}
-                    </div>
-                }
-                {this.state.editMode &&
-                    <div className={s.input}>
-                        <TextField
-                            id="outlined-helperText"
-                            autoFocus
-                            value={this.state.userStatus}
-                            size={"small"}
-                            sx={{width: "600px"}}
-                            onChange={this.editStatusOnChange}
-                            onBlur={this.onBlurMode}
-                            onKeyDown={(event) => this.onKeyEnter(event.code)}
+                    {authData.id === userProfile?.userId && <IconButton
+                        color={"primary"}
+                        sx={{mb: "10px", ml: "5px"}}
+                        onClick={activateEditMode}
+                    >
+                        <EditIcon
+                            fontSize={"small"}
                         />
-                        <IconButton
-                            size={"small"}
-                            color={"default"}
-                            sx={{mt: "3px"}}
-                            onMouseDown={this.deactivateEditMode}
-                        >
-                            <DoneIcon
-                                fontSize={"medium"}
-                            />
-                        </IconButton>
-                    </div>}
-
-
-            </div>
-        );
-    }
+                    </IconButton>}
+                </div>
+            }
+            {editMode &&
+                <div className={s.input}>
+                    <TextField
+                        id="outlined-helperText"
+                        autoFocus
+                        value={status}
+                        size={"small"}
+                        sx={{width: "600px"}}
+                        onChange={editStatusOnChange}
+                        onBlur={onBlurMode}
+                        onKeyDown={(event) => onKeyEnter(event.code)}
+                    />
+                    <IconButton
+                        size={"small"}
+                        color={"default"}
+                        sx={{mt: "3px"}}
+                        onMouseDown={deactivateEditMode}
+                    >
+                        <DoneIcon fontSize={"medium"}/>
+                    </IconButton>
+                </div>}
+        </div>
+    );
 }
+
 
 export default ProfileStatus;
