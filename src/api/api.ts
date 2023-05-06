@@ -1,66 +1,54 @@
 import axios from "axios"
-import {UsersType} from "redux/usersPage-reducer";
+import { UsersType } from "redux/usersPage-reducer"
 
 type ResponseType = {
-    items: UsersType[]
-    error: null | string
-    totalCount: number
+  items: UsersType[]
+  error: null | string
+  totalCount: number
 }
 
 const instance = axios.create({
-    withCredentials: true,
-    baseURL: "https://social-network.samuraijs.com/api/1.0/",
-    headers: {"API-KEY": "2a8c69e4-572a-4487-8ff6-116dea09581f"}
+  withCredentials: true,
+  baseURL: "https://social-network.samuraijs.com/api/1.0/",
+  headers: { "API-KEY": "2a8c69e4-572a-4487-8ff6-116dea09581f" },
 })
 
 export const usersAPI = {
-    getUsers: (currentPage: number, pageSize: number) => {
-        return instance
-            .get<ResponseType>(
-                `/users?page=${currentPage}&count=${pageSize}`,
-            ).then(res => res.data)
-    },
-    getProfile: (userID: string) => {
-        console.warn("Obsolete method. Please profileAPI object.")
-        return profileAPI.getProfile(userID)
-    },
-    follow: (userID: number) => {
-        return instance.post(`follow/${userID}`)
-    },
-    unFollow: (userID: number) => {
-        return instance.delete(`follow/${userID}`)
-    }
-
+  getUsers: (currentPage: number, pageSize: number) => {
+    return instance
+      .get<ResponseType>(`/users?page=${currentPage}&count=${pageSize}`)
+      .then((res) => res.data)
+  },
+  getProfile: (userID: string) => {
+    console.warn("Obsolete method. Please profileAPI object.")
+    return profileAPI.getProfile(userID)
+  },
+  follow: (userID: number) => {
+    return instance.post(`follow/${userID}`)
+  },
+  unFollow: (userID: number) => {
+    return instance.delete(`follow/${userID}`)
+  },
 }
 export const authAPI = {
-    me: () => {
-        return instance.get("auth/me")
-    },
-    loggIn: (email: string, password: string, rememberMe: boolean = false) => {
-        return instance.post("/auth/login", {email, password, rememberMe})
-    },
-    loggOut: () => {
-        return instance.delete("/auth/login")
-    },
-
+  me: () => {
+    return instance.get("auth/me")
+  },
+  loggIn: (email: string, password: string, rememberMe: boolean = false) => {
+    return instance.post("/auth/login", { email, password, rememberMe })
+  },
+  loggOut: () => {
+    return instance.delete("/auth/login")
+  },
 }
 export const profileAPI = {
-    getProfile: (userID: string) => {
-        return instance
-            .get(`profile/${userID}`)
-    },
-    getStatus: (userId: string) => {
-        return instance
-            .get(`profile/status/${userId}`)
-    },
-    updateStatus: (status: string) => {
-        return instance
-            .put(`profile/status`, {status})
-    }
+  getProfile: (userID: string) => {
+    return instance.get(`profile/${userID}`)
+  },
+  getStatus: (userId: string) => {
+    return instance.get(`profile/status/${userId}`)
+  },
+  updateStatus: (status: string) => {
+    return instance.put(`profile/status`, { status })
+  },
 }
-
-
-
-
-
-

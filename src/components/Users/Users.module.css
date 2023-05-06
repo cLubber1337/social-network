@@ -1,95 +1,92 @@
 .content {
-    grid-area: c;
-    background-color: rgba(245, 245, 245, 0.2);
-    padding: 7px 7px 7px 15px;
-    border-radius: 10px;
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 2px solid rgba(255, 255, 255, .09);
-    margin: 7px 0 5px 8px;
-    box-shadow: 0 0 4px 1px #046380;
-
+  grid-area: c;
+  background-color: rgba(245, 245, 245, 0.2);
+  padding: 7px 7px 7px 15px;
+  border-radius: 10px;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 2px solid rgba(255, 255, 255, 0.09);
+  margin: 7px 0 5px 8px;
+  box-shadow: 0 0 4px 1px #046380;
 }
 
 .subscriber {
-    display: flex;
-    padding-bottom: 15px;
+  display: flex;
+  padding-bottom: 15px;
 }
 
 .photoStatus {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .button {
-    width: 100px;
-    height: 30px;
-    margin-top: 10px;
-    border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  margin-top: 10px;
+  border-radius: 5px;
 }
 
 .description {
-    border: solid rgb(4, 99, 128, 1);
-    border-radius: 10px;
-    width: 80%;
-    margin-left: 20px;
-    display: flex;
-    justify-content: space-between;
-
+  border: solid rgb(4, 99, 128, 1);
+  border-radius: 10px;
+  width: 80%;
+  margin-left: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .nameStatus {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    justify-content: space-between
-
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-between;
 }
 
 .location {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-between;
 }
 .pagination {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .page {
-    margin-left: 10px;
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgb(4, 99, 128, 1);
-    border-radius: 50%;
-    color:rgb(4, 99, 128, 1) ;
-    padding: 5px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    user-select: none;
-    transition: 0.2s;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgb(4, 99, 128, 1);
+  border-radius: 50%;
+  color: rgb(4, 99, 128, 1);
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.2s;
 }
 .page:hover {
-    background-color:rgb(4, 99, 128, 0.2);
+  background-color: rgb(4, 99, 128, 0.2);
 }
 .page:active {
-    background-color:rgb(4, 99, 128, 1);
-    color: white;
+  background-color: rgb(4, 99, 128, 1);
+  color: white;
 }
 .active {
-    margin-left: 10px;
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgb(4, 99, 128, 1);
-    border-radius: 50%;
-    padding: 5px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    user-select: none;
-    transition: 0.2s;
-    background-color:rgb(4, 99, 128, 0.7);
-    color: white;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgb(4, 99, 128, 1);
+  border-radius: 50%;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.2s;
+  background-color: rgb(4, 99, 128, 0.7);
+  color: white;
 }

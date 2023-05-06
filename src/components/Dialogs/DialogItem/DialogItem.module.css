@@ -1,22 +1,21 @@
 .dialogItem {
-    text-decoration: none;
-
+  text-decoration: none;
 }
 
 .dialog {
-    color: #046380;
-    text-decoration: none;
-    font-size: 18px;
-    display: flex;
+  color: #046380;
+  text-decoration: none;
+  font-size: 18px;
+  display: flex;
 }
 
 .dialog .photo {
-    width: 70px;
-    border-radius: 50%;
+  width: 70px;
+  border-radius: 50%;
 }
 
 .name {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
 }

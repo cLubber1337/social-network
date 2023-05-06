@@ -1,27 +1,27 @@
 .header {
-    display: flex;
-    align-items: center;
-    padding: 20px 50px;
-    justify-content: space-between;
-    background-color: #046380;
-    grid-area: h;
-    border-bottom: 2px solid rgba(255, 255, 255, .09);
+  display: flex;
+  align-items: center;
+  padding: 20px 50px;
+  justify-content: space-between;
+  background-color: #046380;
+  grid-area: h;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.09);
 }
 .logo {
-    margin-left: 150px;
+  margin-left: 150px;
 }
 .loginBlock {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 30px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
 }
 .loginLink {
-    color: white;
-    text-decoration: none;
-    padding-right: 50px;
+  color: white;
+  text-decoration: none;
+  padding-right: 50px;
 }
 .logoutLink {
-    color: white;
-    text-decoration: none;
-    padding-right: 50px;
+  color: white;
+  text-decoration: none;
+  padding-right: 50px;
 }

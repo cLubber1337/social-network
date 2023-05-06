@@ -1,25 +1,20 @@
 .allMessages {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .message {
-    background-color: white;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 20px;
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 2px solid rgba(255, 255, 255, .09);
-    box-shadow: 0 2px 15px rgb(4, 99, 128);
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    word-break: break-all;
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 2px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 2px 15px rgb(4, 99, 128);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  word-break: break-all;
 }
-
-
-
-
-
