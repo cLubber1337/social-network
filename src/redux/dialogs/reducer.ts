@@ -1,13 +1,5 @@
-export type DialogsType = {
-  id: number
-  name: string
-}
-export type MessagesType = {
-  id: number
-  message: string
-}
-type sendMessageActionType = ReturnType<typeof sendMessage>
-type ActionType = sendMessageActionType
+import { DialogsActionType, DialogsType, MessagesType } from "redux/dialogs/types"
+
 type InitialStateType = typeof initialState
 
 let initialState = {
@@ -31,7 +23,7 @@ let initialState = {
 
 const dialogsPageReducer = (
   state: InitialStateType = initialState,
-  action: ActionType
+  action: DialogsActionType
 ): InitialStateType => {
   switch (action.type) {
     case "SEND-MESSAGE": {
@@ -42,7 +34,7 @@ const dialogsPageReducer = (
       return state
   }
 }
-
+// actions
 export const sendMessage = (newMessageBody: string) =>
   ({ type: "SEND-MESSAGE", newMessageBody } as const)
 

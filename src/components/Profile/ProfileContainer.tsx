@@ -2,10 +2,11 @@ import React, { ComponentType } from "react"
 import { Profile } from "./Profile"
 import { connect } from "react-redux"
 import { AppStateType } from "redux/store"
-import { getStatus, getUserProfile, ProfileType, updateStatus } from "redux/profilePage-reducer"
+import { getStatus, getUserProfile, updateStatus } from "redux/profile/reducer"
 import { RouteComponentProps, withRouter } from "react-router-dom"
 import { compose } from "redux"
 import withAuthRedirect from "../../hoc/withAuthRedirect"
+import { ProfileType } from "redux/profile"
 
 type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 

@@ -1,9 +1,9 @@
 import React, { memo } from "react"
 import s from "./ProfileInfo.module.css"
-import { getCurrentUserProfile } from "redux/profilePage-reducer"
 import ProfileStatus from "../ProfileStatus/ProfileStatus"
 import { useSelector } from "react-redux"
-import { getAuthData } from "redux/auth-reducer"
+import { selectCurrentUserProfile } from "redux/profile"
+import { selectAuthData } from "redux/auth"
 
 type ProfileInfoType = {
   userStatus: string
@@ -12,8 +12,8 @@ type ProfileInfoType = {
 }
 
 export const ProfileInfo = memo(({ userStatus, updateStatus, photoLarge }: ProfileInfoType) => {
-  const userProfile = useSelector(getCurrentUserProfile)
-  const authData = useSelector(getAuthData)
+  const userProfile = useSelector(selectCurrentUserProfile)
+  const authData = useSelector(selectAuthData)
 
   return (
     <div>

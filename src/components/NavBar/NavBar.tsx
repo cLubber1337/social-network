@@ -8,7 +8,7 @@ export const NavBar = () => {
     <div className={s.NavBar}>
       <ul>
         {NAVBAR_NAVIGATION.map(({ path, name, icon }) => (
-          <NavLink exact activeClassName={s.active} to={path}>
+          <NavLink exact activeClassName={s.active} to={path} key={name}>
             <li className={s.item}>
               <img src={icon} alt={name} />
               <span>{name}</span>
@@ -16,6 +16,7 @@ export const NavBar = () => {
           </NavLink>
         ))}
       </ul>
+      {/*------------------- Friends---------------------------*/}
       <hr />
       <span>Friends</span>
       <div className={s.sidebar}>

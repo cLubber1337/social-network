@@ -4,7 +4,7 @@ import { Post } from "./Post/Post"
 import { reduxForm } from "redux-form"
 import { FormDataForPostType, PostForm } from "./PostForm"
 import { useDispatch } from "react-redux"
-import { addPost } from "redux/profilePage-reducer"
+import { addPost } from "redux/profile/reducer"
 
 const PostReduxForm = reduxForm<FormDataForPostType>({ form: "post" })(PostForm)
 
@@ -13,6 +13,7 @@ export const MyPosts = memo(() => {
 
   const onAddPost = (formData: FormDataForPostType) => {
     dispatch(addPost(formData.post))
+    formData.post = ""
   }
 
   return (

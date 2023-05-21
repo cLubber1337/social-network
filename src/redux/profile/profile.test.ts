@@ -1,8 +1,5 @@
-import profilePageReducer, {
-  AddPostActionType,
-  deletePostActionType,
-  InitialStateType,
-} from "redux/profilePage-reducer"
+import profilePageReducer, { InitialStateType } from "redux/profile/reducer"
+import { AddPostActionType, deletePostActionType } from "redux/profile/types"
 
 it("new post should be added", () => {
   const initialState: InitialStateType = {

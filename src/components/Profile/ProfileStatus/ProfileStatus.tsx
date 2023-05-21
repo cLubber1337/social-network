@@ -3,8 +3,8 @@ import s from "./ProfileStatus.module.css"
 import { IconButton, TextField } from "@mui/material"
 import DoneIcon from "@mui/icons-material/Done"
 import EditIcon from "@mui/icons-material/Edit"
-import { AuthDataType } from "redux/auth-reducer"
-import { ProfileType } from "redux/profilePage-reducer"
+import { ProfileType } from "redux/profile"
+import { AuthDataType } from "redux/auth"
 
 type ProfileStatusType = {
   userStatus: string

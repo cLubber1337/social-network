@@ -1,51 +1,7 @@
 import { profileAPI, usersAPI } from "api/api"
-import { AppStateType, AppThunk } from "./store"
+import { AppThunk } from "redux/store"
+import { PostsType, PostType, ProfileActionTypes, ProfileType } from "redux/profile/types"
 
-type setCurrentStatusACType = ReturnType<typeof setStatus>
-type setUpdateStatusACType = ReturnType<typeof setUpdateStatus>
-export type AddPostActionType = ReturnType<typeof addPost>
-export type deletePostActionType = ReturnType<typeof deletePost>
-type SetUserProfileType = ReturnType<typeof setUserProfile>
-type ActionTypes =
-  | AddPostActionType
-  | SetUserProfileType
-  | setCurrentStatusACType
-  | setUpdateStatusACType
-  | deletePostActionType
-
-export type PostsType = {
-  id: number
-  text: string
-  photo: string
-  like: number
-}
-export type PostType = {
-  id: number
-  text: string
-  photo: string
-  like: number
-}
-export type ProfileType = {
-  aboutMe: string
-  contacts: {
-    facebook: null | string
-    website: null | string
-    vk: null | string
-    twitter: null | string
-    instagram: null | string
-    youtube: null | string
-    github: null | string
-    mainLink: null | string
-  }
-  lookingForAJob: boolean
-  lookingForAJobDescription: null | string
-  fullName: string
-  userId: number
-  photos: {
-    small: string | undefined
-    large: string | undefined
-  }
-}
 export type InitialStateType = typeof initialState
 
 let initialState = {
@@ -78,7 +34,7 @@ let initialState = {
 
 const profilePageReducer = (
   state: InitialStateType = initialState,
-  action: ActionTypes
+  action: ProfileActionTypes
 ): InitialStateType => {
   switch (action.type) {
     case "ADD-POST":
@@ -107,13 +63,14 @@ const profilePageReducer = (
       return state
   }
 }
-
+// actions
 export const addPost = (post: string) => ({ type: "ADD-POST", post } as const)
 export const deletePost = (id: number) => ({ type: "DELETE-POST", id } as const)
 export const setStatus = (userStatus: string) => ({ type: "SET-STATUS", userStatus } as const)
 export const setUpdateStatus = (status: string) => ({ type: "UPDATE-STATUS", status } as const)
 export const setUserProfile = (profile: ProfileType | null) =>
   ({ type: "SET-USER-PROFILE", profile } as const)
+
 //thunks
 export const getUserProfile =
   (userID: string): AppThunk =>
@@ -135,8 +92,5 @@ export const getStatus =
     let { data } = await profileAPI.getStatus(userID)
     dispatch(setStatus(data))
   }
-
-export const getCurrentUserProfile = (state: AppStateType) => state.profilePage.profile
-export const getPosts = (state: AppStateType) => state.profilePage.postsData
 
 export default profilePageReducer

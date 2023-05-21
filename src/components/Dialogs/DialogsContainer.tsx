@@ -1,10 +1,11 @@
 import React, { ComponentType } from "react"
 import { connect } from "react-redux"
 import { Dialogs } from "./Dialogs"
-import { sendMessage, DialogsType, MessagesType } from "redux/dialogsPage-reducer"
+import { sendMessage } from "redux/dialogs/reducer"
 import { AppStateType } from "redux/store"
 import { compose } from "redux"
 import withAuthRedirect from "hoc/withAuthRedirect"
+import { DialogsType, MessagesType } from "redux/dialogs"
 
 type MapStateToPropsType = {
   dialogs: DialogsType[]

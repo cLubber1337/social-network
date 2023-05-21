@@ -11,12 +11,14 @@ import ProfileContainer from "./components/Profile/ProfileContainer"
 import { Login } from "components/Login/Login"
 import { Header } from "components/Header/Header"
 import { useDispatch, useSelector } from "react-redux"
-import { getInitialized, initialize } from "redux/app-reducer"
+import { initialize } from "redux/app/reducer"
 import Preloader from "components/common/Preloader"
+import { selectInitialized } from "redux/app"
+
 
 const App = () => {
   const dispatch = useDispatch()
-  const initialized = useSelector(getInitialized)
+  const initialized = useSelector(selectInitialized)
 
   useEffect(() => {
     dispatch(initialize())

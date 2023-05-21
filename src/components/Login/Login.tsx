@@ -4,12 +4,13 @@ import styles from "./Login.module.css"
 import { reduxForm } from "redux-form"
 import { FormDataType, LoginForm } from "./LoginForm"
 import { useDispatch, useSelector } from "react-redux"
-import { getIsAuth, login } from "redux/auth-reducer"
+import { login } from "redux/auth/reducer"
 import { Redirect } from "react-router-dom"
+import { selectIsAuth } from "redux/auth"
 
 export const Login = () => {
   const dispatch = useDispatch()
-  const isAuth = useSelector(getIsAuth)
+  const isAuth = useSelector(selectIsAuth)
   const onSubmit = (formData: FormDataType) => {
     dispatch(login(formData.Email, formData.Password, formData.rememberMe))
   }

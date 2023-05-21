@@ -2,9 +2,9 @@ import React from "react"
 import style from "./Dialogs.module.css"
 import { DialogItem } from "./DialogItem/DialogItem"
 import { Message } from "./Message/Message"
-import { DialogsType, MessagesType } from "redux/dialogsPage-reducer"
 import { reduxForm } from "redux-form"
 import { AddMessageForm, FormDataForAddMessageType } from "./AddMessageForm"
+import { DialogsType, MessagesType } from "redux/dialogs"
 
 type PropsType = {
   dialogs: DialogsType[]
@@ -16,6 +16,7 @@ type PropsType = {
 export const Dialogs = ({ dialogs, sendMessage, messages }: PropsType) => {
   const addNewMessage = (formData: FormDataForAddMessageType) => {
     sendMessage(formData.newMessageBody)
+    formData.newMessageBody = ""
   }
 
   return (

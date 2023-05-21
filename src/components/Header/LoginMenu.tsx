@@ -1,14 +1,15 @@
 import React from "react"
 import { Button, Menu, MenuItem } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
-import { getAuthData, getIsAuth, logout } from "redux/auth-reducer"
+import { logout } from "redux/auth/reducer"
 import { NavLink } from "react-router-dom"
 import s from "./Header.module.css"
+import { selectAuthData, selectIsAuth } from "redux/auth"
 
 export default function LoginMenu() {
   const dispatch = useDispatch()
-  const AuthData = useSelector(getAuthData)
-  const isAuth = useSelector(getIsAuth)
+  const AuthData = useSelector(selectAuthData)
+  const isAuth = useSelector(selectIsAuth)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

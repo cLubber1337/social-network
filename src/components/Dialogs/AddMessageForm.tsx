@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, FormEvent } from "react"
 import { Field, InjectedFormProps } from "redux-form"
 import style from "./Dialogs.module.css"
 import { maxLengthCreator, requiredField } from "utils/validators/validators"

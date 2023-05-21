@@ -1,5 +1,5 @@
 import axios from "axios"
-import { UsersType } from "redux/usersPage-reducer"
+import { UsersType } from "redux/users"
 
 type ResponseType = {
   items: UsersType[]

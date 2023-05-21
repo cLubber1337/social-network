@@ -1,10 +1,10 @@
 import React from "react"
 import s from "./Post.module.css"
 import { useSelector } from "react-redux"
-import { getPosts } from "redux/profilePage-reducer"
+import { selectPosts } from "redux/profile"
 
 export const Post = () => {
-  const posts = useSelector(getPosts)
+  const posts = useSelector(selectPosts)
 
   return (
     <div className={s.content}>

@@ -1,32 +1,26 @@
 import React from "react"
 import style from "./Users.module.css"
-import { requestUsers, UsersType } from "redux/usersPage-reducer"
+import { unFollowThunk, requestUsers, followThunk } from "redux/users/reducer"
 import { NavLink } from "react-router-dom"
 import { Pagination, Button, Avatar } from "@mui/material"
-import { usersAPI } from "api/api"
 import { useDispatch } from "react-redux"
+import { UsersType } from "redux/users"
 
 type UsersPropsType = {
   users: UsersType[]
-  follow: (userId: number) => void
-  unFollow: (userId: number) => void
   pageSize: number
   totalUserCount: number
   currentPage: number
-  toggleFollowingInProgress: (isFetching: boolean, userID: number) => void
   followingInProgress: number[]
 }
 
-const Users: React.FC<UsersPropsType> = ({
+const Users = ({
   users,
-  unFollow,
-  follow,
   currentPage,
   totalUserCount,
   pageSize,
-  toggleFollowingInProgress,
   followingInProgress,
-}) => {
+}: UsersPropsType) => {
   const dispatch = useDispatch()
   let pageCount = Math.ceil(totalUserCount / pageSize)
   let page = []
@@ -34,27 +28,15 @@ const Users: React.FC<UsersPropsType> = ({
     page.push(i)
   }
 
-  const unFollowOnClick = (userID: number) => {
-    toggleFollowingInProgress(true, userID)
-    usersAPI.unFollow(userID).then((res) => {
-      if (res.data.resultCode === 0) {
-        unFollow(userID)
-      }
-      toggleFollowingInProgress(false, userID)
-    })
+  const onUnFollowClick = (userID: number) => {
+    dispatch(unFollowThunk(userID))
   }
 
-  const followOnClick = (userID: number) => {
-    toggleFollowingInProgress(true, userID)
-    usersAPI.follow(userID).then((res) => {
-      if (res.data.resultCode === 0) {
-        follow(userID)
-      }
-      toggleFollowingInProgress(false, userID)
-    })
+  const onFollowClick = (userID: number) => {
+    dispatch(followThunk(userID))
   }
 
-  const onClickPageChanged1 = (currPage: number) => {
+  const onClickPageChanged = (currPage: number) => {
     dispatch(requestUsers(currPage, pageSize))
   }
 
@@ -80,7 +62,7 @@ const Users: React.FC<UsersPropsType> = ({
                 color={"primary"}
                 className={style.button}
                 variant={"outlined"}
-                onClick={() => unFollowOnClick(user.id)}
+                onClick={() => onUnFollowClick(user.id)}
                 disabled={followingInProgress.some((id) => id === user.id)}
               >
                 Unfollow
@@ -90,7 +72,7 @@ const Users: React.FC<UsersPropsType> = ({
                 color={"primary"}
                 variant={"contained"}
                 className={style.button}
-                onClick={() => followOnClick(user.id)}
+                onClick={() => onFollowClick(user.id)}
                 disabled={followingInProgress.some((id) => id === user.id)}
               >
                 Follow
@@ -117,7 +99,7 @@ const Users: React.FC<UsersPropsType> = ({
             count={pageCount}
             color="primary"
             page={currentPage}
-            onChange={(_, num) => onClickPageChanged1(num)}
+            onChange={(_, num) => onClickPageChanged(num)}
           />
         </div>
       </div>
