@@ -1,53 +1,20 @@
 import React from "react"
 import s from "./NavBar.module.css"
-import profile from "./icon/profile.png"
-import chat from "./icon/chat.png"
-import users from "./icon/users.png"
-import news from "./icon/news.png"
-import settings from "./icon/settings.png"
-import music from "./icon/music.png"
 import { NavLink } from "react-router-dom"
+import { NAVBAR_NAVIGATION } from "utils/navigation/NavBarNavigation"
 
 export const NavBar = () => {
   return (
     <div className={s.NavBar}>
       <ul>
-        <NavLink exact activeClassName={s.active} to={`/`}>
-          <li className={s.item}>
-            <img src={profile} alt="profile" />
-            <span>My profile</span>
-          </li>
-        </NavLink>
-        <NavLink activeClassName={s.active} to="/dialogs">
-          <li className={s.item}>
-            <img src={chat} alt="chat" />
-            <span>Messages</span>
-          </li>
-        </NavLink>
-        <NavLink activeClassName={s.active} to="/news">
-          <li className={s.item}>
-            <img src={news} alt="news" />
-            <span>News</span>
-          </li>
-        </NavLink>
-        <NavLink activeClassName={s.active} to="/music">
-          <li className={s.item}>
-            <img src={music} alt="music" />
-            <span>Music</span>
-          </li>
-        </NavLink>
-        <NavLink activeClassName={s.active} to="/settings">
-          <li className={s.item}>
-            <img src={settings} alt="settings" />
-            <span>Settings</span>
-          </li>
-        </NavLink>
-        <NavLink activeClassName={s.active} to="/users">
-          <li className={s.item}>
-            <img src={users} alt="users" />
-            <span>Find users</span>
-          </li>
-        </NavLink>
+        {NAVBAR_NAVIGATION.map(({ path, name, icon }) => (
+          <NavLink exact activeClassName={s.active} to={path}>
+            <li className={s.item}>
+              <img src={icon} alt={name} />
+              <span>{name}</span>
+            </li>
+          </NavLink>
+        ))}
       </ul>
       <hr />
       <span>Friends</span>

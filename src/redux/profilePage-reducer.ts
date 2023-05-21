@@ -3,13 +3,15 @@ import { AppStateType, AppThunk } from "./store"
 
 type setCurrentStatusACType = ReturnType<typeof setStatus>
 type setUpdateStatusACType = ReturnType<typeof setUpdateStatus>
-type AddPostActionType = ReturnType<typeof addPost>
+export type AddPostActionType = ReturnType<typeof addPost>
+export type deletePostActionType = ReturnType<typeof deletePost>
 type SetUserProfileType = ReturnType<typeof setUserProfile>
 type ActionTypes =
   | AddPostActionType
   | SetUserProfileType
   | setCurrentStatusACType
   | setUpdateStatusACType
+  | deletePostActionType
 
 export type PostsType = {
   id: number
@@ -99,12 +101,15 @@ const profilePageReducer = (
     }
     case "UPDATE-STATUS":
       return { ...state, userStatus: action.status }
+    case "DELETE-POST":
+      return { ...state, postsData: state.postsData.filter((p) => p.id !== action.id) }
     default:
       return state
   }
 }
 
 export const addPost = (post: string) => ({ type: "ADD-POST", post } as const)
+export const deletePost = (id: number) => ({ type: "DELETE-POST", id } as const)
 export const setStatus = (userStatus: string) => ({ type: "SET-STATUS", userStatus } as const)
 export const setUpdateStatus = (status: string) => ({ type: "UPDATE-STATUS", status } as const)
 export const setUserProfile = (profile: ProfileType | null) =>
