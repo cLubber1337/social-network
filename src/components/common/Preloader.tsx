@@ -7,7 +7,7 @@ const Preloader = () => {
       <img
         src={loading}
         alt={"loading"}
-        style={{ width: "500px", alignSelf: "center", margin: "0 auto" }}
+        style={{ width: "300px", alignSelf: "center", margin: "200px auto" }}
       />
     </>
   )

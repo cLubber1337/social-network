@@ -1,15 +1,17 @@
 import React, { memo } from "react"
-import s from "./MyPosts.module.css"
+import styles from "./MyPosts.module.css"
 import { Post } from "./Post/Post"
 import { reduxForm } from "redux-form"
 import { FormDataForPostType, PostForm } from "./PostForm"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addPost } from "redux/profile/reducer"
+import { selectPosts } from "redux/profile"
 
 const PostReduxForm = reduxForm<FormDataForPostType>({ form: "post" })(PostForm)
 
 export const MyPosts = memo(() => {
   const dispatch = useDispatch()
+  const posts = useSelector(selectPosts)
 
   const onAddPost = (formData: FormDataForPostType) => {
     dispatch(addPost(formData.post))
@@ -17,12 +19,18 @@ export const MyPosts = memo(() => {
   }
 
   return (
-    <div className={s.content}>
-      <h3>My posts</h3>
-      <div>
-        <PostReduxForm onSubmit={onAddPost} />
+    <section className={`${styles.my__posts}`}>
+      <div className={styles.my__posts__form}>
+        <h3 className={styles.my__posts__form__title}>My posts</h3>
+        <div>
+          <PostReduxForm onSubmit={onAddPost} />
+        </div>
       </div>
-      <Post />
-    </div>
+      <div className={styles.posts}>
+        {posts.map((post) => (
+          <Post key={post.id} {...post} />
+        ))}
+      </div>
+    </section>
   )
 })

@@ -17,9 +17,8 @@ export const selectTotalUserCount = (state: AppStateType) => {
 export const selectCurrentPage = (state: AppStateType) => {
   return state.usersPage.currentPage
 }
-export const selectIsFetching = (state: AppStateType) => {
-  return state.usersPage.isFetching
-}
+export const selectIsFetching = (state: AppStateType) => state.usersPage.isFetching
+
 export const selectFollowingInProgress = (state: AppStateType) => {
   return state.usersPage.followingInProgress
 }

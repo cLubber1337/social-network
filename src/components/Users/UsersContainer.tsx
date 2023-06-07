@@ -2,18 +2,17 @@ import React, { ComponentType } from "react"
 import { connect } from "react-redux"
 import { AppStateType } from "redux/store"
 import { setCurrentPage, setTotalUserCount, setUsers, toggleIsFetching } from "redux/users/reducer"
-import Users from "./Users"
-import Preloader from "../common/Preloader"
+import UsersPage from "components/Users/UsersPage"
 import { usersAPI } from "api/api"
 import withAuthRedirect from "../../hoc/withAuthRedirect"
 import { compose } from "redux"
 import {
   selectCurrentPage,
   selectFollowingInProgress,
-  selectIsFetching,
   selectPageSize,
   selectTotalUserCount,
   getUsers,
+  selectIsFetching,
 } from "redux/users/selectors"
 import { UsersType } from "redux/users"
 
@@ -22,8 +21,8 @@ type MapStateToPropsType = {
   pageSize: number
   totalUserCount: number
   currentPage: number
-  isFetching: boolean
   followingInProgress: number[]
+  isFetching: boolean
 }
 type UsersPropsType = {
   users: UsersType[]
@@ -55,17 +54,14 @@ class UsersContainer extends React.Component<UsersPropsType> {
   render() {
     return (
       <>
-        {this.props.isFetching ? (
-          <Preloader />
-        ) : (
-          <Users
-            users={this.props.users}
-            pageSize={this.props.pageSize}
-            totalUserCount={this.props.totalUserCount}
-            currentPage={this.props.currentPage}
-            followingInProgress={this.props.followingInProgress}
-          />
-        )}
+        <UsersPage
+          users={this.props.users}
+          pageSize={this.props.pageSize}
+          totalUserCount={this.props.totalUserCount}
+          currentPage={this.props.currentPage}
+          followingInProgress={this.props.followingInProgress}
+          isFetching={this.props.isFetching}
+        />
       </>
     )
   }

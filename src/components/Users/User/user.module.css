@@ -1,0 +1,61 @@
+.user {
+  display: flex;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgb(4, 99, 128, 0.3);
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  height: 135px;
+  position: relative;
+}
+
+.photo__button {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  max-width: 120px;
+  width: 100%;
+  padding: 12px;
+  position: relative;
+}
+.photo {
+
+}
+.button {
+  width: 100%;
+}
+
+
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  gap: 12px;
+  margin-left: 6px;
+}
+.status {
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.name {
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.friends__true {
+   color: green;
+}
+.friends__false {
+   color: red;
+}
+
+
+
+
+

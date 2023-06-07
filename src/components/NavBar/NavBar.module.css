@@ -1,16 +1,17 @@
 .NavBar {
   grid-area: n;
-  background: rgb(4, 99, 128, 0.3);
   height: 100%;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(6px);
   margin-right: 5px;
   font-size: 17px;
   border-right: 2px solid rgba(255, 255, 255, 0.09);
+  border-left: 1px solid rgb(4, 99, 128, 0.3);
   text-align: center;
   padding-top: 10px;
   text-decoration: none;
   width: 100%;
+  background-color:rgb(4, 99, 128, 0.3);
 }
 .NavBar ul a {
   text-decoration: none;

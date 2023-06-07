@@ -2,11 +2,11 @@ import React from "react"
 import s from "./Message.module.css"
 import { MessagesType } from "redux/dialogs"
 
-type PropsType = {
+type Props = {
   messages: MessagesType[]
 }
 
-export const Message: React.FC<PropsType> = ({ messages }) => {
+export const Message = ({ messages }: Props) => {
   return (
     <div className={s.allMessages}>
       {messages.map((m) => (

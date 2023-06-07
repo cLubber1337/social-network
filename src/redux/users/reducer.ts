@@ -10,7 +10,7 @@ let initialState = {
   totalUserCount: 0,
   currentPage: 1,
   isFetching: false,
-  followingInProgress: [2],
+  followingInProgress: [1] as number[],
   photoLarge: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
 }
 
@@ -30,7 +30,7 @@ const usersReducer = (
         items: state.items.map((u) => (u.id === action.userId ? { ...u, followed: false } : u)),
       }
     case "SET_USERS":
-      return { ...state, items: [...action.items] }
+      return { ...state, items: [...action.items].reverse() }
     case "SET_CURRENT_PAGE":
       return { ...state, currentPage: action.currentPage }
     case "SET_TOTAL_USER_COUNT":

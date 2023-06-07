@@ -15,18 +15,13 @@ const theme = createTheme({
   },
 })
 
-let rerenderEntireTree = () => {
-  ReactDOM.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </Provider>
-    </BrowserRouter>,
-    document.getElementById("root")
-  )
-}
-rerenderEntireTree()
-
-store.subscribe(rerenderEntireTree)
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById("root")
+)

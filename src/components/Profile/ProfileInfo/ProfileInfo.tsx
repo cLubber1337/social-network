@@ -1,5 +1,5 @@
 import React, { memo } from "react"
-import s from "./ProfileInfo.module.css"
+import styles from "./ProfileInfo.module.css"
 import ProfileStatus from "../ProfileStatus/ProfileStatus"
 import { useSelector } from "react-redux"
 import { selectCurrentUserProfile } from "redux/profile"
@@ -17,11 +17,11 @@ export const ProfileInfo = memo(({ userStatus, updateStatus, photoLarge }: Profi
 
   return (
     <div>
-      <div className={s.content}>
+      <div className={styles.profile__info}>
         <div>
           {userProfile !== null && (
             <img
-              className={s.profileImg}
+              className={styles.profile__info__img}
               src={userProfile.photos.small !== null ? userProfile.photos.small : photoLarge}
               alt="imageUser"
             />

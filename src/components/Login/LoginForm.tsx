@@ -10,9 +10,9 @@ export type FormDataType = {
   rememberMe: boolean
 }
 
-export const LoginForm: FC<InjectedFormProps<FormDataType>> = (props) => {
+export const LoginForm = ({ handleSubmit, error }: InjectedFormProps<FormDataType>) => {
   return (
-    <form onSubmit={props.handleSubmit} className={styles.content}>
+    <form onSubmit={handleSubmit} className={styles.content}>
       <Field name={"Email"} component={Input} validate={[requiredField]} />
       <Field name={"Password"} component={Input} validate={[requiredField]} />
       <div className={styles.checkboxText}>
@@ -24,7 +24,7 @@ export const LoginForm: FC<InjectedFormProps<FormDataType>> = (props) => {
         />
         <div className={styles.text}>Remember Me</div>
       </div>
-      {props.error && <div className={styles.commonError}>{props.error}</div>}
+      {error && <div className={styles.commonError}>{error}</div>}
       <button className={styles.button}>LOGIN</button>
     </form>
   )

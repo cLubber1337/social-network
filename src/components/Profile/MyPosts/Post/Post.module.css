@@ -1,13 +1,10 @@
-.content {
-  background-color: rgba(245, 245, 245, 0.3);
-  margin-top: 10px;
-  border-radius: 5px;
+.post {
+  border-top: 1px solid #ccc;
   display: flex;
   flex-direction: column;
+  padding: 12px;
 }
-.post {
-  margin-top: 10px;
-}
+
 .photoText {
   display: flex;
 }

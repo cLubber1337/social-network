@@ -1,4 +1,4 @@
-import React, { ChangeEvent, memo, useEffect } from "react"
+import React, { ChangeEvent, memo, useEffect, useState } from "react"
 import s from "./ProfileStatus.module.css"
 import { IconButton, TextField } from "@mui/material"
 import DoneIcon from "@mui/icons-material/Done"
@@ -6,7 +6,7 @@ import EditIcon from "@mui/icons-material/Edit"
 import { ProfileType } from "redux/profile"
 import { AuthDataType } from "redux/auth"
 
-type ProfileStatusType = {
+export type ProfileStatusType = {
   userStatus: string
   updateStatus: (status: string) => void
   authData: AuthDataType
@@ -15,12 +15,11 @@ type ProfileStatusType = {
 
 const ProfileStatus = memo(
   ({ userStatus, updateStatus, authData, userProfile }: ProfileStatusType) => {
-    const [editMode, setEditMode] = React.useState(false)
-    const [status, setStatus] = React.useState(userStatus)
+    const [editMode, setEditMode] = useState(false)
+    const [status, setStatus] = useState(userStatus)
 
-    const activateEditMode = () => {
-      setEditMode(true)
-    }
+    const activateEditMode = () => setEditMode(true)
+
     const deactivateEditMode = () => {
       setEditMode(false)
       updateStatus(status)
