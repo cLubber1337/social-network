@@ -29,6 +29,13 @@ export const usersAPI = {
   unFollow: (userID: number) => {
     return instance.delete(`follow/${userID}`)
   },
+  getFriends: (currentPage: number, pageSize: number, searchValue: string) => {
+    return instance
+      .get<ResponseType>(
+        `users?page=${currentPage}&count=${pageSize}&friend=true&term=${searchValue}`
+      )
+      .then((res) => res.data)
+  },
 }
 export const authAPI = {
   me: () => {

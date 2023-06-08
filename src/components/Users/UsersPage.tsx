@@ -2,10 +2,10 @@ import React from "react"
 import styles from "components/Users/users-page.module.css"
 import { requestUsers } from "redux/users/reducer"
 import { Pagination } from "@mui/material"
-import { useDispatch, useSelector } from "react-redux"
-import { selectIsFetching, UsersType } from "redux/users"
+import { useDispatch } from "react-redux"
+import { UsersType } from "redux/users"
 import { User } from "components/Users/User/User"
-import { UsersSearch } from "components/Users/UsersSearch/UsersSearch"
+import { Search } from "components/Search/Search"
 import Preloader from "components/common/Preloader"
 
 type UsersPropsType = {
@@ -39,7 +39,7 @@ const UsersPage = ({
 
   return (
     <section className={`${styles.users__section} content`}>
-      <UsersSearch />
+      <Search />
 
       {isFetching ? (
         <Preloader />

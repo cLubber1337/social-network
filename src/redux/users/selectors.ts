@@ -22,3 +22,4 @@ export const selectIsFetching = (state: AppStateType) => state.usersPage.isFetch
 export const selectFollowingInProgress = (state: AppStateType) => {
   return state.usersPage.followingInProgress
 }
+export const selectFriends = (state: AppStateType) => state.usersPage.friends

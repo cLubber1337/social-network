@@ -6,6 +6,7 @@ type InitialStateType = typeof initialState
 
 let initialState = {
   items: [] as UsersType[],
+  friends: [] as UsersType[],
   pageSize: 8,
   totalUserCount: 0,
   currentPage: 1,
@@ -30,7 +31,9 @@ const usersReducer = (
         items: state.items.map((u) => (u.id === action.userId ? { ...u, followed: false } : u)),
       }
     case "SET_USERS":
-      return { ...state, items: [...action.items].reverse() }
+      return { ...state, items: [...action.items] }
+    case "SET_FRIENDS":
+      return { ...state, friends: [...action.friends] }
     case "SET_CURRENT_PAGE":
       return { ...state, currentPage: action.currentPage }
     case "SET_TOTAL_USER_COUNT":
@@ -52,6 +55,8 @@ const usersReducer = (
 export const follow = (userId: number) => ({ type: "FOLLOW", userId } as const)
 export const unFollow = (userId: number) => ({ type: "UNFOLLOW", userId } as const)
 export const setUsers = (items: UsersType[]) => ({ type: "SET_USERS", items } as const)
+export const setFriends = (friends: UsersType[]) => ({ type: "SET_FRIENDS", friends } as const)
+
 export const setCurrentPage = (currentPage: number) =>
   ({ type: "SET_CURRENT_PAGE", currentPage } as const)
 export const setTotalUserCount = (totalUsers: number) =>
@@ -75,6 +80,16 @@ export const requestUsers =
     dispatch(toggleIsFetching(false))
     dispatch(setUsers(data.items))
   }
+export const fetchFriends =
+  (currentPage: number, pageSize: number, searchValue: string): AppThunk =>
+  async (dispatch) => {
+    dispatch(setCurrentPage(currentPage))
+    dispatch(toggleIsFetching(true))
+    let data = await usersAPI.getFriends(currentPage, pageSize, searchValue)
+    dispatch(toggleIsFetching(false))
+    dispatch(setFriends(data.items))
+  }
+
 export const unFollowThunk =
   (userId: number): AppThunk =>
   async (dispatch) => {

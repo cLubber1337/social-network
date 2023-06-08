@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styles from "components/Users/User/user.module.css"
 import { NavLink } from "react-router-dom"
 import { Avatar, Button } from "@mui/material"
@@ -23,6 +23,7 @@ export const User = ({ name, id, photos, status, followed, followingInProgress }
   const onFollowClick = (userID: number) => {
     dispatch(followThunk(userID))
   }
+  console.log(followed)
 
   return (
     <div className={styles.user}>

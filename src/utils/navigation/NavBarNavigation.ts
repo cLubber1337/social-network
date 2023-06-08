@@ -1,12 +1,18 @@
-import profile from "components/NavBar/icon/profile.png"
-import chat from "components/NavBar/icon/chat.png"
-import users from "components/NavBar/icon/users.png"
+import profile from "assets/icon/profile.png"
+import chat from "assets/icon/chat.png"
+import users from "assets/icon/users.png"
+import search from "assets/icon/search.png"
 
 export const NAVBAR_NAVIGATION = [
   {
     path: "/",
     name: "My profile",
     icon: profile,
+  },
+  {
+    path: "/friends",
+    name: "Friends",
+    icon: users,
   },
   {
     path: "/dialogs",
@@ -16,6 +22,6 @@ export const NAVBAR_NAVIGATION = [
   {
     path: "/users",
     name: "Find users",
-    icon: users,
+    icon: search,
   },
 ]

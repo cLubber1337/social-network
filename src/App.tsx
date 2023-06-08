@@ -11,8 +11,17 @@ import { useDispatch, useSelector } from "react-redux"
 import { initialize } from "redux/app/reducer"
 import Preloader from "components/common/Preloader"
 import { selectInitialized } from "redux/app"
+import { Friends } from "components/Friends/Friends"
+
+export type SearchInputType = {
+  searchInput: string
+  setSearchInput: React.Dispatch<React.SetStateAction<string>>
+}
+
+export const SearchContext = React.createContext<SearchInputType>({} as SearchInputType)
 
 const App = () => {
+  const [searchInput, setSearchInput] = React.useState("")
   const dispatch = useDispatch()
   const initialized = useSelector(selectInitialized)
 
@@ -28,16 +37,19 @@ const App = () => {
     )
   return (
     <div className="app-wrapper">
-      <Header />
-      <NavBar />
-      <Switch>
-        <Route path="/profile/:userID?" render={() => <ProfileContainer />} />
-        <Route path="/dialogs/" render={() => <DialogsContainer />} />
-        <Route path="/users" component={UsersContainer} />
-        <Route path="/login" component={Login} />
-        <Route path="/" exact component={ProfileContainer} />
-        <Route path="*" render={() => <div>404 Not Found</div>} />
-      </Switch>
+      <SearchContext.Provider value={{ searchInput, setSearchInput }}>
+        <Header />
+        <NavBar />
+        <Switch>
+          <Route path="/profile/:userID?" render={() => <ProfileContainer />} />
+          <Route path="/dialogs/" render={() => <DialogsContainer />} />
+          <Route path="/users" component={UsersContainer} />
+          <Route path="/login" component={Login} />
+          <Route path="/" exact component={ProfileContainer} />
+          <Route path="/friends" component={Friends} />
+          <Route path="*" render={() => <div>404 Not Found</div>} />
+        </Switch>
+      </SearchContext.Provider>
     </div>
   )
 }

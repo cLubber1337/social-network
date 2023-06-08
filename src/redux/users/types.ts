@@ -1,6 +1,7 @@
 import {
   follow,
   setCurrentPage,
+  setFriends,
   setTotalUserCount,
   setUsers,
   toggleFollowingInProgress,
@@ -15,7 +16,7 @@ export type SetTotalUserCountTypeAC = ReturnType<typeof setTotalUserCount>
 export type SetUsersTypeAC = ReturnType<typeof setUsers>
 export type isFetchingTypeAC = ReturnType<typeof toggleIsFetching>
 export type followingInProgressTypeAC = ReturnType<typeof toggleFollowingInProgress>
-
+export type SetFriendsTypeAC = ReturnType<typeof setFriends>
 export type UsersActionType =
   | SetCurrentPageTypeAC
   | FollowTypeAC
@@ -24,6 +25,7 @@ export type UsersActionType =
   | SetTotalUserCountTypeAC
   | isFetchingTypeAC
   | followingInProgressTypeAC
+  | SetFriendsTypeAC
 
 export type UsersType = {
   name: string
