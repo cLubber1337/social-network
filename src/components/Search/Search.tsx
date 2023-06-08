@@ -1,11 +1,14 @@
-import React, { useCallback, useContext, useState } from "react"
+import React, { useCallback, useState } from "react"
 import styles from "components/Search/search.module.css"
-import { SearchContext } from "App"
 import debounce from "lodash/debounce"
 
-export const Search = () => {
+type Props = {
+  setSearchInput: (str: string) => void
+}
+
+export const Search = ({ setSearchInput }: Props) => {
   const [value, setValue] = useState("")
-  const { setSearchInput } = useContext(SearchContext)
+
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
     updateSearchVale(e.currentTarget.value)

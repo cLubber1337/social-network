@@ -8,7 +8,8 @@ let initialState = {
   items: [] as UsersType[],
   friends: [] as UsersType[],
   pageSize: 8,
-  totalUserCount: 0,
+  totalUsersCount: 0,
+  totalFriendsCount: 0,
   currentPage: 1,
   isFetching: false,
   followingInProgress: [1] as number[],
@@ -29,6 +30,7 @@ const usersReducer = (
       return {
         ...state,
         items: state.items.map((u) => (u.id === action.userId ? { ...u, followed: false } : u)),
+        friends: state.friends.filter((u) => u.id !== action.userId),
       }
     case "SET_USERS":
       return { ...state, items: [...action.items] }
@@ -37,7 +39,9 @@ const usersReducer = (
     case "SET_CURRENT_PAGE":
       return { ...state, currentPage: action.currentPage }
     case "SET_TOTAL_USER_COUNT":
-      return { ...state, totalUserCount: action.totalUsers }
+      return { ...state, totalUsersCount: action.totalUsers }
+    case "SET_TOTAL_FRIENDS_COUNT":
+      return { ...state, totalFriendsCount: action.totalFriends }
     case "TOGGLE_IS_FETCHING":
       return { ...state, isFetching: action.isFetching }
     case "TOGGLE_FOLLOWING_IN_PROGRESS":
@@ -61,6 +65,8 @@ export const setCurrentPage = (currentPage: number) =>
   ({ type: "SET_CURRENT_PAGE", currentPage } as const)
 export const setTotalUserCount = (totalUsers: number) =>
   ({ type: "SET_TOTAL_USER_COUNT", totalUsers } as const)
+export const setTotalFriendsCount = (totalFriends: number) =>
+  ({ type: "SET_TOTAL_FRIENDS_COUNT", totalFriends } as const)
 export const toggleIsFetching = (isFetching: boolean) =>
   ({ type: "TOGGLE_IS_FETCHING", isFetching } as const)
 
@@ -71,12 +77,12 @@ export const toggleFollowingInProgress = (isFetching: boolean, userID: number) =
     userID,
   } as const)
 
-export const requestUsers =
-  (currentPage: number, pageSize: number): AppThunk =>
+export const fetchUsers =
+  (currentPage: number, pageSize: number, searchValue: string): AppThunk =>
   async (dispatch) => {
     dispatch(setCurrentPage(currentPage))
     dispatch(toggleIsFetching(true))
-    let data = await usersAPI.getUsers(currentPage, pageSize)
+    let data = await usersAPI.getUsers(currentPage, pageSize, searchValue)
     dispatch(toggleIsFetching(false))
     dispatch(setUsers(data.items))
   }

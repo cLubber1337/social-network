@@ -1,19 +1,15 @@
 import { AppStateType } from "redux/store"
-import { createSelector } from "reselect"
-import { UsersType } from "redux/users/types"
 
-export const getUserSelector = (state: AppStateType) => {
+export const selectUsers = (state: AppStateType) => {
   return state.usersPage.items
 }
-export const getUsers = createSelector(getUserSelector, (users: UsersType[]) => {
-  return users.filter((u) => u)
-})
+
 export const selectPageSize = (state: AppStateType) => {
   return state.usersPage.pageSize
 }
-export const selectTotalUserCount = (state: AppStateType) => {
-  return state.usersPage.totalUserCount
-}
+export const selectTotalUserCount = (state: AppStateType) => state.usersPage.totalUsersCount
+export const selectTotalFriendsCount = (state: AppStateType) => state.usersPage.totalFriendsCount
+
 export const selectCurrentPage = (state: AppStateType) => {
   return state.usersPage.currentPage
 }

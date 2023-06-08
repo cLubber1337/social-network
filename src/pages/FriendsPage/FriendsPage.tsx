@@ -1,0 +1,51 @@
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  fetchFriends,
+  selectFriends,
+  selectPageSize,
+  selectTotalFriendsCount,
+  setFriends,
+  setTotalFriendsCount,
+  toggleIsFetching,
+} from "redux/users"
+import { usersAPI } from "api/api"
+import { Users } from "components/Users/Users"
+
+export const FriendsPage = () => {
+  const dispatch = useDispatch()
+  const friends = useSelector(selectFriends)
+  const totalFriendsCount = useSelector(selectTotalFriendsCount)
+  const pageSize = useSelector(selectPageSize)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [searchInput, setSearchInput] = useState("")
+
+  const onClickPageChanged = (currPage: number) => {
+    dispatch(fetchFriends(currPage, pageSize, searchInput))
+    setCurrentPage(currPage)
+    setSearchInput("")
+  }
+
+  useEffect(() => {
+    dispatch(toggleIsFetching(true))
+    usersAPI.getFriends(currentPage, pageSize, searchInput).then((data) => {
+      dispatch(toggleIsFetching(false))
+      dispatch(setFriends(data.items))
+      dispatch(setTotalFriendsCount(data.totalCount))
+    })
+
+    return () => {
+      setCurrentPage(1)
+    }
+  }, [searchInput])
+
+  return (
+    <Users
+      currentPage={currentPage}
+      users={friends}
+      totalUsersCount={totalFriendsCount}
+      onClickPageChanged={onClickPageChanged}
+      setSearchInput={setSearchInput}
+    />
+  )
+}

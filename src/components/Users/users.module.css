@@ -1,0 +1,13 @@
+.users__section {
+    position: relative;
+    width: 100%;
+
+}
+
+.users {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 40px;
+    gap: 20px;
+    padding: 10px;
+}
