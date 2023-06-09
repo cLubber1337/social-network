@@ -8,13 +8,17 @@
 .profile__card {
     display: grid;
     grid-template-columns: 151px 1fr;
+    position: relative;
 }
 
 .profile__card__img {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     position: relative;
     width: 150px;;
+    gap: 6px;
 }
 
 
@@ -25,10 +29,11 @@
     border: 5px solid rgb(4, 99, 128, 0.5);
 }
 
+
 .profile__card__img__edit {
     cursor: pointer;
     position: absolute;
-    bottom: 35px;
+    bottom: 56px;
     right: 15px;
     color: #046380;
 }
@@ -63,3 +68,45 @@
     font-weight: bold;
     color: #5aaac3;
 }
+
+.button {
+    margin-top: 30px;
+    height: 30px;
+    font-size: 14px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+    .profile__card {
+        display: flex;
+        flex-direction: column;
+    }
+    .profile__card__img {
+
+    }
+
+    .profile__card__img__edit {
+        bottom: 38px;
+        right: 15px;
+
+    }
+}
+
+@media screen and (max-width: 765px) {
+    .profile__card {
+        align-items: center;
+    }
+    .profile__card__info {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+}
+
+
+

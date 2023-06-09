@@ -9,5 +9,11 @@
     grid-template-columns: 1fr 1fr;
     margin-top: 40px;
     gap: 20px;
-    padding: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+    .users {
+        display: flex;
+        flex-direction: column;
+    }
 }

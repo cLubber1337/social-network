@@ -1,74 +1,86 @@
 .NavBar {
-  grid-area: n;
-  height: 100%;
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(6px);
-  margin-right: 5px;
-  font-size: 17px;
-  border-right: 2px solid rgba(255, 255, 255, 0.09);
-  border-left: 1px solid rgb(4, 99, 128, 0.3);
-  text-align: center;
-  padding-top: 10px;
-  text-decoration: none;
-  width: 100%;
-  background-color:rgb(4, 99, 128, 0.3);
+    grid-area: n;
+    height: 100%;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(6px);
+    margin-right: 5px;
+    font-size: 17px;
+    border-right: 2px solid rgba(255, 255, 255, 0.09);
+    border-left: 1px solid rgb(4, 99, 128, 0.3);
+    text-align: center;
+    padding-top: 10px;
+    text-decoration: none;
+    width: 100%;
+    background-color: rgb(4, 99, 128, 0.3);
 }
+
 .NavBar ul a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .item {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  border-radius: 4px;
-  height: 50px;
-  padding: 0 16px;
-  margin: 8px 0;
-  color: #046380;
-  opacity: 0.9;
-  transition: 0.4s;
-  text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 4px;
+    height: 50px;
+    padding: 0 16px;
+    margin: 8px 0;
+    color: #046380;
+    opacity: 0.9;
+    transition: 0.4s;
+    text-decoration: none;
 }
 
 .item:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .active .item {
-  font-weight: bold;
-  transition: all 0.3s;
-  opacity: 1;
-  transform: scale(1, 1);
-  letter-spacing: 2px;
+    font-weight: bold;
+    transition: all 0.3s;
+    opacity: 1;
+    transform: scale(1, 1);
+    letter-spacing: 2px;
 }
 
 .NavBar ul {
-  padding: 0 10px;
+    padding: 0 10px;
 }
 
-.item span {
-  margin-left: 10px;
-  pointer-events: none;
+.name {
+    margin-left: 10px;
+    pointer-events: none;
 }
 
 hr {
-  width: 80%;
-  height: 2px;
-  border-radius: 3px;
-  background: rgb(4, 99, 128, 0.1);
+    width: 80%;
+    height: 2px;
+    border-radius: 3px;
+    background: rgb(4, 99, 128, 0.1);
 }
 
 .sidebar {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  margin-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 30px;
 }
 
 .photo {
-  width: 60px;
-  border-radius: 50%;
-  border: solid rgb(4, 99, 128, 0.5);
+    width: 60px;
+    border-radius: 50%;
+    border: solid rgb(4, 99, 128, 0.5);
+}
+
+@media screen and (max-width: 765px) {
+    .name {
+        display: none;
+    }
+    .item {
+        padding: 0;
+        margin: 8px 0;
+        justify-content: center;
+    }
 }

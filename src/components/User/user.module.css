@@ -1,61 +1,73 @@
 .user {
-  display: flex;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 5px rgb(4, 99, 128, 0.3);
-  background-color: #fff;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #333;
-  height: 135px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+    display: flex;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgb(4, 99, 128, 0.3);
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    height: 135px;
 }
 
 .photo__button {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  max-width: 120px;
-  width: 100%;
-  padding: 12px;
-  position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    max-width: 120px;
+    width: 100%;
+    padding: 12px;
+    position: relative;
 }
-.photo {
-
-}
-.button {
-  width: 100%;
-}
-
 
 .info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-  margin-left: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 6px;
+
 }
+
+.button {
+
+}
+
 .status {
- margin-right: 15px;
+    padding-right: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
+
 .name {
-  white-space: nowrap;
-  overflow-x: hidden;
 }
+
 .friends__true {
-   color: green;
+    color: green;
 }
+
 .friends__false {
-   color: red;
+    color: red;
 }
 
+@media screen and (max-width: 765px) {
+    .user {
+        flex-direction: column;
+        height: 100%;
+    }
 
+    .photo__button {
+        max-width: 100%;
+        width: 100%;
+        padding: 6px;
+    }
 
-
-
+    .button {
+        width: 100px;
+        font-size: 15px;
+        height: 20px;
+    }
+}

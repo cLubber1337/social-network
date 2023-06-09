@@ -1,5 +1,4 @@
 export const requiredField = (value: string) => {
-  console.log(value)
   if (value) return undefined
   return "Field is required"
 }

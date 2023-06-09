@@ -8,8 +8,6 @@ import { compose } from "redux"
 import withAuthRedirect from "hoc/withAuthRedirect"
 import { ProfileType } from "redux/profile"
 
-type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
-
 type MapStatePropsType = {
   profile: ProfileType | null
   userStatus: string
@@ -17,14 +15,19 @@ type MapStatePropsType = {
   authUserId: number | null
   isAuth: boolean
 }
+
 type MapDispatchPropsType = {
   getUserProfile: (userID: string) => void
   getStatus: (userID: string) => void
   updateStatus: (status: string) => void
 }
+
 type PathParamsType = {
   userID: string
 }
+
+type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
+
 type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
 class ProfileContainer extends React.Component<PropsType> {

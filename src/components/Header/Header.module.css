@@ -13,15 +13,23 @@
 .loginBlock {
   display: flex;
   justify-content: flex-end;
-  margin-right: 30px;
 }
 .loginLink {
   color: white;
   text-decoration: none;
-  padding-right: 50px;
 }
 .logoutLink {
   color: white;
   text-decoration: none;
   padding-right: 50px;
+}
+@media screen and (max-width: 765px) {
+  .logo {
+    margin-left: 4px;
+    width: 150px;
+  }
+  .header {
+    padding: 20px 12px;
+    justify-content: space-between;
+  }
 }

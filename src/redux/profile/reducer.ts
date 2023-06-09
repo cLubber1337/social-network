@@ -1,6 +1,12 @@
 import { profileAPI, usersAPI } from "api/api"
 import { AppThunk } from "redux/store"
-import { PostsType, PostType, ProfileActionTypes, ProfileType } from "redux/profile/types"
+import {
+  PostsType,
+  PostType,
+  ProfileActionTypes,
+  ProfileType,
+  ProfileTypeForUpdate,
+} from "redux/profile/types"
 
 export type InitialStateType = typeof initialState
 
@@ -8,28 +14,20 @@ let initialState = {
   postsData: [
     {
       id: 1,
-      text: "Haven't heard from you for a long time",
-      photo:
-        "https://img.freepik.com/premium-vector/man-dashiki-fashion-model_726184-234.jpg?w=826",
+      text: "I am glad to see you on my page!",
+      photo: "https://social-network.samuraijs.com/activecontent/images/users/27740/user.jpg?v=7",
       like: 2,
     },
     {
       id: 2,
-      text: "I love you!",
-      photo:
-        "https://img.freepik.com/free-vector/korean-drawing-style-character-design_52683-92286.jpg?w=826&t=st=1671760295~exp=1671760895~hmac=a9c8ddfc28e01fc5e416f6f10e1e3db6b696cbf23900fd1c9fb313b6a4612ac8",
+      text: "I love juicy pineapple.",
+      photo: "https://social-network.samuraijs.com/activecontent/images/users/27740/user.jpg?v=7",
       like: 15,
-    },
-    {
-      id: 3,
-      text: "Yo, what's up, bro?",
-      photo:
-        "https://img.freepik.com/premium-vector/cartoon-style-illustration-man-smile-confidently-with-crossed-hand-chest_7443-231.jpg?w=826",
-      like: 10,
     },
   ] as PostType[],
   profile: null as null | ProfileType,
   userStatus: "",
+  updateProfile: {} as ProfileTypeForUpdate,
 }
 
 const profilePageReducer = (
@@ -39,10 +37,9 @@ const profilePageReducer = (
   switch (action.type) {
     case "ADD-POST":
       let newPost: PostsType = {
-        id: 4,
+        id: 12,
         text: action.post,
-        photo:
-          "https://img.freepik.com/free-vector/korean-drawing-style-character-design_52683-92286.jpg?w=826&t=st=1671760295~exp=1671760895~hmac=a9c8ddfc28e01fc5e416f6f10e1e3db6b696cbf23900fd1c9fb313b6a4612ac8",
+        photo: "https://social-network.samuraijs.com/activecontent/images/users/27740/user.jpg?v=7",
         like: 777,
       }
       return { ...state, postsData: [newPost, ...state.postsData] }
@@ -52,6 +49,9 @@ const profilePageReducer = (
       } else {
         return { ...state, profile: action.profile }
       }
+    case "SET-UPDATE-PROFILE": {
+      return { ...state, updateProfile: action.updateProfile }
+    }
     case "SET-STATUS": {
       return { ...state, userStatus: action.userStatus }
     }
@@ -70,6 +70,8 @@ export const setStatus = (userStatus: string) => ({ type: "SET-STATUS", userStat
 export const setUpdateStatus = (status: string) => ({ type: "UPDATE-STATUS", status } as const)
 export const setUserProfile = (profile: ProfileType | null) =>
   ({ type: "SET-USER-PROFILE", profile } as const)
+export const setUpdateProfile = (updateProfile: ProfileTypeForUpdate) =>
+  ({ type: "SET-UPDATE-PROFILE", updateProfile } as const)
 
 //thunks
 export const getUserProfile =

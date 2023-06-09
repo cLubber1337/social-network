@@ -1,0 +1,43 @@
+
+.profile__info {
+    margin-left: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.profile__info__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile__info__right {
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+ line-height: 1.5rem;
+}
+
+.item__name {
+    font-weight: bold;
+    color: #5aaac3;
+}
+
+
+
+@media screen and (max-width: 765px) {
+
+    .profile__info {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+}
+
+
+

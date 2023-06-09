@@ -1,5 +1,5 @@
 import profilePageReducer, { InitialStateType } from "redux/profile/reducer"
-import { AddPostActionType, deletePostActionType } from "redux/profile/types"
+import { AddPostActionType, deletePostActionType, ProfileTypeForUpdate } from "redux/profile/types"
 
 it("new post should be added", () => {
   const initialState: InitialStateType = {
@@ -19,6 +19,7 @@ it("new post should be added", () => {
     ],
     profile: null,
     userStatus: "",
+    updateProfile: {} as ProfileTypeForUpdate,
   }
 
   const action: AddPostActionType = {
@@ -50,6 +51,7 @@ it("new post should be added", () => {
     ],
     profile: null,
     userStatus: "",
+    updateProfile: {} as ProfileTypeForUpdate,
   }
   const resultState = profilePageReducer(initialState, action)
   expect(resultState).toEqual(expectedState)
@@ -73,6 +75,7 @@ it("after deleting post should be deleted", () => {
       },
     ],
     profile: null,
+    updateProfile: {} as ProfileTypeForUpdate,
     userStatus: "",
   }
   const action: deletePostActionType = {
@@ -90,6 +93,7 @@ it("after deleting post should be deleted", () => {
     ],
     profile: null,
     userStatus: "",
+    updateProfile: {} as ProfileTypeForUpdate,
   }
   const resultState = profilePageReducer(initialState, action)
   expect(resultState).toEqual(expectedState)

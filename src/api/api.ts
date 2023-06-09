@@ -1,5 +1,6 @@
 import axios from "axios"
 import { UsersType } from "redux/users"
+import { ProfileTypeForUpdate } from "redux/profile"
 
 type ResponseType = {
   items: UsersType[]
@@ -66,5 +67,8 @@ export const profileAPI = {
         "Content-Type": "multipart/form-data",
       },
     })
+  },
+  updateProfile: (profile: ProfileTypeForUpdate) => {
+    return instance.put(`profile`, profile)
   },
 }

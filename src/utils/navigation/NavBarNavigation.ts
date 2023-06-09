@@ -5,7 +5,7 @@ import search from "assets/icon/search.png"
 
 export const NAVBAR_NAVIGATION = [
   {
-    path: "/",
+    path: "/profile/:userID?",
     name: "My profile",
     icon: profile,
   },
