@@ -22,20 +22,21 @@ export const LoginPage = () => {
     <Box
       sx={{
         display: "flex",
-        flexWrap: "wrap",
-        "& > :not(style)": {
-          m: 2,
-          width: 400,
-          height: 380,
-        },
+        flexDirection: "column",
+        alignItems: "center",
         justifyContent: "center",
-        marginTop: "50px",
+        mb: 20,
       }}
     >
-      <Paper elevation={3} className={styles.root}>
+      <Paper elevation={1} className={styles.paper}>
         <h1>Login</h1>
         <LoginReduxForm onSubmit={onSubmit} />
       </Paper>
+      <div className={styles.credentials}>
+        <h4>Please use the following test login credentials to log in:</h4>
+        <p>Email: free@samuraijs.com</p>
+        <p>Password: free</p>
+      </div>
     </Box>
   )
 }

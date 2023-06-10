@@ -40,7 +40,7 @@ const profilePageReducer = (
         id: 12,
         text: action.post,
         photo: "https://social-network.samuraijs.com/activecontent/images/users/27740/user.jpg?v=7",
-        like: 777,
+        like: 0,
       }
       return { ...state, postsData: [newPost, ...state.postsData] }
     case "SET-USER-PROFILE":

@@ -1,8 +1,8 @@
-import React, { FC, FormEvent } from "react"
+import React, { FC } from "react"
 import { Field, InjectedFormProps } from "redux-form"
-import style from "./Dialogs.module.css"
+import style from "./add-message-form.module.css"
 import { maxLengthCreator, requiredField } from "utils/validators/validators"
-import { Textarea } from "../common/FormsControls/FormsControls"
+import { Textarea } from "components/common/FormsControls/FormsControls"
 
 export type FormDataForAddMessageType = {
   newMessageBody: string
@@ -19,7 +19,7 @@ export const AddMessageForm: FC<InjectedFormProps<FormDataForAddMessageType>> = 
           component={Textarea}
           validate={[requiredField, maxLength]}
         />
-        <div>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <button className={style.button}>Send</button>
         </div>
       </form>

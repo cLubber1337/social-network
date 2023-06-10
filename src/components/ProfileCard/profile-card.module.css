@@ -105,6 +105,9 @@
         align-items: flex-start;
         width: 100%;
     }
+    .profile__card__img__edit {
+        bottom: 46px;
+    }
 
 }
 

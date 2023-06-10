@@ -19,10 +19,11 @@ export const PostForm = (props: InjectedFormProps<FormDataForPostType>) => {
         component={Textarea}
         validate={[requiredField, maxLength]}
       />
-
-      <Button style={{ marginTop: "5px" }} type={"submit"} variant={"contained"}>
-        ADD POST
-      </Button>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button style={{ marginTop: "10px" }} type={"submit"} variant={"contained"}>
+          ADD POST
+        </Button>
+      </div>
     </form>
   )
 }

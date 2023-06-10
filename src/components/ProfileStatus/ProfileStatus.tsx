@@ -1,5 +1,5 @@
 import React, { ChangeEvent, memo, useEffect, useState } from "react"
-import s from "components/ProfileStatus/ProfileStatus.module.css"
+import s from "components/ProfileStatus/profile-status.module.css"
 import { IconButton, TextField } from "@mui/material"
 import DoneIcon from "@mui/icons-material/Done"
 import EditIcon from "@mui/icons-material/Edit"
@@ -46,7 +46,8 @@ const ProfileStatus = memo(
         {!editMode && (
           <div>
             <p className={s.statusText}>
-              <span style={{ color: "#046380" }}>Status</span>: {userStatus}
+              <span style={{ color: "black", fontWeight: "bold", fontSize: "18px" }}>Status</span>:{" "}
+              {userStatus}
               {authData.id === userProfile?.userId && (
                 <IconButton
                   color={"primary"}
@@ -66,7 +67,7 @@ const ProfileStatus = memo(
               autoFocus
               value={status}
               size={"small"}
-              sx={{ width: "600px" }}
+              sx={{ width: "100%" }}
               onChange={editStatusOnChange}
               onBlur={onBlurMode}
               onKeyDown={(event) => onKeyEnter(event.code)}

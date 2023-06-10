@@ -1,4 +1,5 @@
-import { DialogsActionType, DialogsType, MessagesType } from "redux/dialogs/types"
+import { DialogsActionType, DialogsType, MessagesType, MyMessagesType } from "redux/dialogs/types"
+import { v1 } from "uuid"
 
 type InitialStateType = typeof initialState
 
@@ -14,11 +15,8 @@ let initialState = {
   messages: [
     { id: 1, message: "Hi!" },
     { id: 2, message: "How do you do?" },
-    { id: 3, message: "I go to school!" },
-    { id: 4, message: "I like play basketball" },
-    { id: 5, message: "My name is Henry" },
-    { id: 6, message: "What!?????" },
   ] as MessagesType[],
+  myMessages: [{ id: v1(), myMessages: "Hi! I am fine and you?" }] as MyMessagesType[],
 }
 
 const dialogsPageReducer = (
@@ -27,8 +25,8 @@ const dialogsPageReducer = (
 ): InitialStateType => {
   switch (action.type) {
     case "SEND-MESSAGE": {
-      let newMessage: MessagesType = { id: 7, message: action.newMessageBody }
-      return { ...state, messages: [...state.messages, newMessage] }
+      let newMessage: MyMessagesType = { id: v1(), myMessages: action.newMessageBody }
+      return { ...state, myMessages: [...state.myMessages, newMessage] }
     }
     default:
       return state

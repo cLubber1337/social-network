@@ -21,7 +21,6 @@ export const usersAPI = {
       .then((res) => res.data)
   },
   getProfile: (userID: string) => {
-    console.warn("Obsolete method. Please profileAPI object.")
     return profileAPI.getProfile(userID)
   },
   follow: (userID: number) => {

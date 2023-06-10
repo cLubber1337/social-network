@@ -17,7 +17,7 @@
 .content {
   grid-area: c;
   padding: 20px;
-  box-shadow: 0 0 5px rgb(4, 99, 128, 0.3);
+  border-right: 1px solid rgb(4, 99, 128, 0.3);
 }
 
 .preloader {
@@ -37,5 +37,9 @@
   .app-wrapper {
     grid-template-columns: 54px 10fr;
   }
-
+}
+.messages-page {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 10px;
 }

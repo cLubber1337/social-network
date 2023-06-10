@@ -3,7 +3,7 @@ import { Button, Menu, MenuItem } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
 import { logout } from "redux/auth/reducer"
 import { NavLink } from "react-router-dom"
-import s from "./Header.module.css"
+import s from "components/Header/header.module.css"
 import { selectAuthData, selectIsAuth } from "redux/auth"
 
 export default function LoginMenu() {

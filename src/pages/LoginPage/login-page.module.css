@@ -1,9 +1,12 @@
-.root {
+.paper {
   background-color: rgb(4, 99, 128, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 40px;
+  justify-content: center;
+  max-width: 380px;
+  width: 100%;
+  height: 400px;
 }
 
 .content {
@@ -39,7 +42,8 @@
 
 .button {
   margin-top: 20px;
-  width: 257px;
+  max-width: 257px;
+  width: 100%;
   height: 40px;
   color: white;
   background-color: #046380;
@@ -76,4 +80,12 @@
 .commonError {
   padding: 5px;
   color: red;
+}
+.credentials {
+  margin-top: 32px;
+  max-width: 380px;
+  width: 100%;
+}
+.credentials h4 {
+  margin-bottom: 12px;
 }

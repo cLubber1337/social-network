@@ -2,6 +2,7 @@ import { AppThunk } from "redux/store"
 import { authAPI } from "api/api"
 import { stopSubmit } from "redux-form"
 import { AuthActionType, AuthDataType, AuthStateType } from "redux/auth/types"
+import { getStatus, getUserProfile } from "redux/profile"
 
 type InitialStateType = typeof initialState
 
@@ -46,6 +47,8 @@ export const login =
     if (data.resultCode === 0) {
       dispatch(getAuthUserData())
       dispatch(setAuth(true))
+      dispatch(getStatus(data.data.userId))
+      dispatch(getUserProfile(data.data.userId))
     } else {
       let message = data.messages.length > 0 ? data.messages[0] : "some error"
       dispatch(stopSubmit("login", { _error: message }))

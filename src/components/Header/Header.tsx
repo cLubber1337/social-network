@@ -1,6 +1,6 @@
 import React from "react"
 import logo from "../../assets/logo.png"
-import s from "./Header.module.css"
+import s from "components/Header/header.module.css"
 import LoginMenu from "components/Header/LoginMenu"
 
 export const Header = () => {
