@@ -12,6 +12,7 @@
   height: 100vh;
   background-size: inherit;
   box-sizing: border-box;
+  position: relative;
 }
 
 .content {
@@ -31,6 +32,15 @@
   justify-content: center;
   margin-top: 20px;
 
+}
+
+.alert-error {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
 }
 
 @media screen and (max-width: 765px) {

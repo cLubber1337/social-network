@@ -7,21 +7,20 @@ import {
   ProfileType,
   ProfileTypeForUpdate,
 } from "redux/profile/types"
+import { v1 } from "uuid"
 
 export type InitialStateType = typeof initialState
 
 let initialState = {
   postsData: [
     {
-      id: 1,
+      id: v1(),
       text: "I am glad to see you on my page!",
-      photo: "https://social-network.samuraijs.com/activecontent/images/users/27740/user.jpg?v=7",
       like: 2,
     },
     {
-      id: 2,
+      id: v1(),
       text: "I love juicy pineapple.",
-      photo: "https://social-network.samuraijs.com/activecontent/images/users/27740/user.jpg?v=7",
       like: 15,
     },
   ] as PostType[],
@@ -37,9 +36,8 @@ const profilePageReducer = (
   switch (action.type) {
     case "ADD-POST":
       let newPost: PostsType = {
-        id: 12,
+        id: v1(),
         text: action.post,
-        photo: "https://social-network.samuraijs.com/activecontent/images/users/27740/user.jpg?v=7",
         like: 0,
       }
       return { ...state, postsData: [newPost, ...state.postsData] }
@@ -58,7 +56,7 @@ const profilePageReducer = (
     case "UPDATE-STATUS":
       return { ...state, userStatus: action.status }
     case "DELETE-POST":
-      return { ...state, postsData: state.postsData.filter((p) => p.id !== action.id) }
+      return { ...state, postsData: state.postsData.filter((p) => p.id !== action.id.toString()) }
     default:
       return state
   }

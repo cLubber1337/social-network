@@ -9,26 +9,30 @@ import { profileAPI } from "api/api"
 import { ProfileInfo } from "components/ProfileInfo/ProfileInfo"
 import { ModalEditProfile } from "components/ModalEditProfile/ModalEditProfile"
 
-type ProfileInfoType = {
+type Props = {
   userStatus: string
   updateStatus: (status: string) => void
   photoLarge: string
 }
 
-export const ProfileCard = memo(({ userStatus, updateStatus, photoLarge }: ProfileInfoType) => {
+export const ProfileCard = memo(({ userStatus, updateStatus, photoLarge }: Props) => {
   const userProfile = useSelector(selectCurrentUserProfile)
   const authData = useSelector(selectAuthData)
   const [photo, setPhoto] = useState<string>()
 
   const handleEditPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0]
-    if (!file) return
-
-    const response = await profileAPI.updatePhoto(file)
-    if (response.data.resultCode === 0) {
-      setPhoto(response.data.data.photos.large)
-    } else {
-      alert(response.data.messages[0])
+    try {
+      const file = e.target.files && e.target.files[0]
+      if (!file) return
+      const response = await profileAPI.updatePhoto(file)
+      if (response.data.resultCode === 0) {
+        setPhoto(response.data.data.photos.large)
+      } else {
+        alert(response.data.messages[0])
+      }
+    } catch (error) {
+      console.error("Error updating photo:", error)
+      alert("Error updating photo. Please try again later.")
     }
   }
 

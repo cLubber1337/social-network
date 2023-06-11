@@ -63,8 +63,12 @@ export const MessagesPage = ({ dialogs, sendMessage, messages, myMessages }: Pro
 
   useEffect(() => {
     const fetchData = async () => {
-      await getDialogsElements()
-      await getMyProfile()
+      try {
+        await getDialogsElements()
+        await getMyProfile()
+      } catch (e) {
+        console.log(e)
+      }
     }
     if (dialogsElements.length === 0) {
       fetchData()

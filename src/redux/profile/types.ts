@@ -23,15 +23,13 @@ export type ProfileActionTypes =
   | SetUpdateProfileType
 
 export type PostsType = {
-  id: number
+  id: string
   text: string
-  photo: string
   like: number
 }
 export type PostType = {
-  id: number
+  id: string
   text: string
-  photo: string
   like: number
 }
 export type ProfileType = {
