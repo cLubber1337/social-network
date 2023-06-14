@@ -11,7 +11,7 @@ type ResponseType = {
 const instance = axios.create({
   withCredentials: true,
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
-  headers: { "API-KEY": "2a8c69e4-572a-4487-8ff6-116dea09581f" },
+  headers: { "API-KEY": "c1ffb00b-dbe6-43ba-a16c-00936fc8ecfd" },
 })
 
 export const usersAPI = {
