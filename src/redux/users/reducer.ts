@@ -80,42 +80,64 @@ export const toggleFollowingInProgress = (isFetching: boolean, userID: number) =
 export const fetchUsers =
   (currentPage: number, pageSize: number, searchValue: string): AppThunk =>
   async (dispatch) => {
-    dispatch(setCurrentPage(currentPage))
-    dispatch(toggleIsFetching(true))
-    let data = await usersAPI.getUsers(currentPage, pageSize, searchValue)
-    dispatch(toggleIsFetching(false))
-    dispatch(setUsers(data.items))
+    try {
+      dispatch(setCurrentPage(currentPage))
+      dispatch(toggleIsFetching(true))
+      let data = await usersAPI.getUsers(currentPage, pageSize, searchValue)
+      dispatch(toggleIsFetching(false))
+      dispatch(setUsers(data.items))
+    } catch (error) {
+      console.log(error)
+    }
   }
 export const fetchFriends =
   (currentPage: number, pageSize: number, searchValue: string): AppThunk =>
   async (dispatch) => {
-    dispatch(setCurrentPage(currentPage))
-    dispatch(toggleIsFetching(true))
-    let data = await usersAPI.getFriends(currentPage, pageSize, searchValue)
-    dispatch(toggleIsFetching(false))
-    dispatch(setFriends(data.items))
+    try {
+      dispatch(setCurrentPage(currentPage))
+      dispatch(toggleIsFetching(true))
+      let data = await usersAPI.getFriends(currentPage, pageSize, searchValue)
+      dispatch(toggleIsFetching(false))
+      dispatch(setFriends(data.items))
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 export const unFollowThunk =
   (userId: number): AppThunk =>
   async (dispatch) => {
     dispatch(toggleFollowingInProgress(true, userId))
-    let { data } = await usersAPI.unFollow(userId)
-    if (data.resultCode === 0) {
-      dispatch(unFollow(userId))
+    try {
+      let { data } = await usersAPI.unFollow(userId)
+      if (data.resultCode === 0) {
+        dispatch(unFollow(userId))
+      } else {
+        console.log(data.messages.join("\n"))
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch(toggleFollowingInProgress(false, userId))
     }
-    dispatch(toggleFollowingInProgress(false, userId))
   }
 
 export const followThunk =
   (userId: number): AppThunk =>
   async (dispatch) => {
     dispatch(toggleFollowingInProgress(true, userId))
-    let { data } = await usersAPI.follow(userId)
-    if (data.resultCode === 0) {
-      dispatch(follow(userId))
+    try {
+      let { data } = await usersAPI.follow(userId)
+      if (data.resultCode === 0) {
+        dispatch(follow(userId))
+      } else {
+        console.log(data.messages.join("\n"))
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch(toggleFollowingInProgress(false, userId))
     }
-    dispatch(toggleFollowingInProgress(false, userId))
   }
 
 export default usersReducer

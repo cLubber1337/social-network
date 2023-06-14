@@ -1,17 +1,9 @@
-import { DialogsActionType, DialogsType, MessagesType, MyMessagesType } from "redux/dialogs/types"
+import { DialogsActionType, MessagesType, MyMessagesType } from "redux/dialogs/types"
 import { v1 } from "uuid"
 
 type InitialStateType = typeof initialState
 
 let initialState = {
-  dialogs: [
-    { id: 1, name: "Andrey" },
-    { id: 2, name: "Zina" },
-    { id: 3, name: "Kali" },
-    { id: 4, name: "Igor" },
-    { id: 5, name: "Henry" },
-    { id: 6, name: "Nina" },
-  ] as DialogsType[],
   messages: [
     { id: 1, message: "Hi!" },
     { id: 2, message: "How do you do?" },

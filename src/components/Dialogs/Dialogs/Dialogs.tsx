@@ -1,13 +1,11 @@
 import React from "react"
 import styles from "components/Dialogs/Dialogs/dialogs.module.css"
 import { NavLink } from "react-router-dom"
-import { DialogsType } from "redux/dialogs"
 import { UsersType } from "redux/users"
 import { Avatar } from "@mui/material"
 import { UserIdContext } from "pages/MessagesPage/MessagesPage"
 
 type PropsType = {
-  dialogs: DialogsType[]
   dialogsElements: UsersType[]
 }
 

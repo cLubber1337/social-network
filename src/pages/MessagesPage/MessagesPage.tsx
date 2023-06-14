@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Dialogs } from "components/Dialogs/Dialogs/Dialogs"
 import { Message } from "components/Dialogs/Message/Message"
-import { DialogsType, MessagesType, MyMessagesType } from "redux/dialogs"
+import { MessagesType, MyMessagesType } from "redux/dialogs"
 import { UsersType } from "redux/users"
 import { profileAPI, usersAPI } from "api/api"
 import { reduxForm } from "redux-form"
@@ -14,7 +14,6 @@ import { selectAuthData } from "redux/auth"
 import { ProfileType } from "redux/profile"
 
 type PropsType = {
-  dialogs: DialogsType[]
   messages: MessagesType[]
   sendMessage: (newMessageBody: string) => void
   myMessages: MyMessagesType[]
@@ -28,7 +27,7 @@ export type UserIdType = {
 
 export const UserIdContext = React.createContext<UserIdType>({} as UserIdType)
 
-export const MessagesPage = ({ dialogs, sendMessage, messages, myMessages }: PropsType) => {
+export const MessagesPage = ({ sendMessage, messages, myMessages }: PropsType) => {
   const [dialogsElements, setDialogsElements] = useState<UsersType[]>([])
   const [myProfile, setMyProfile] = useState<ProfileType>({} as ProfileType)
   const authData = useSelector(selectAuthData)
@@ -81,7 +80,7 @@ export const MessagesPage = ({ dialogs, sendMessage, messages, myMessages }: Pro
         {dialogsElements && myProfile && (
           <>
             <div className={`messages-page`}>
-              <Dialogs dialogs={dialogs} dialogsElements={dialogsElements} />
+              <Dialogs dialogsElements={dialogsElements} />
               <Message
                 messages={messages}
                 dialogsElements={dialogsElements}

@@ -2,7 +2,6 @@ import { AppThunk } from "redux/store"
 import { authAPI } from "api/api"
 import { stopSubmit } from "redux-form"
 import { AuthActionType, AuthDataType, AuthStateType } from "redux/auth/types"
-import { getStatus, getUserProfile } from "redux/profile"
 
 type InitialStateType = typeof initialState
 
@@ -33,10 +32,16 @@ export const setAuthUserData = (data: AuthDataType) => ({ type: "SET_USER_DATA",
 export const setAuth = (isAuth: boolean) => ({ type: "SET_AUTH", isAuth } as const)
 
 export const getAuthUserData = (): AppThunk => async (dispatch) => {
-  let { data } = await authAPI.me()
-  if (data.resultCode === 0) {
-    dispatch(setAuthUserData(data))
-    dispatch(setAuth(true))
+  try {
+    let { data } = await authAPI.me()
+    if (data.resultCode === 0) {
+      dispatch(setAuthUserData(data))
+      dispatch(setAuth(true))
+    } else {
+      console.log(data.messages.join("\n"))
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -46,9 +51,6 @@ export const login =
     let { data } = await authAPI.loggIn(login, password, rememberMe)
     if (data.resultCode === 0) {
       dispatch(getAuthUserData())
-      dispatch(setAuth(true))
-      dispatch(getStatus(data.data.userId))
-      dispatch(getUserProfile(data.data.userId))
     } else {
       let message = data.messages.length > 0 ? data.messages[0] : "some error"
       dispatch(stopSubmit("login", { _error: message }))

@@ -75,22 +75,37 @@ export const setUpdateProfile = (updateProfile: ProfileTypeForUpdate) =>
 export const getUserProfile =
   (userID: string): AppThunk =>
   async (dispatch) => {
-    let { data } = await usersAPI.getProfile(userID)
-    dispatch(setUserProfile(data))
+    try {
+      let { data } = await usersAPI.getProfile(userID)
+      dispatch(setUserProfile(data))
+    } catch (error) {
+      console.log(error)
+    }
   }
+
 export const updateStatus =
   (status: string): AppThunk =>
   async (dispatch) => {
-    let { data } = await profileAPI.updateStatus(status)
-    if (data.resultCode === 0) {
-      dispatch(setUpdateStatus(status))
+    try {
+      let { data } = await profileAPI.updateStatus(status)
+      if (data.resultCode === 0) {
+        dispatch(setUpdateStatus(status))
+      } else {
+        console.log(data.messages.join("\n"))
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 export const getStatus =
   (userID: string): AppThunk =>
   async (dispatch) => {
-    let { data } = await profileAPI.getStatus(userID)
-    dispatch(setStatus(data))
+    try {
+      let { data } = await profileAPI.getStatus(userID)
+      dispatch(setStatus(data))
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 export default profilePageReducer

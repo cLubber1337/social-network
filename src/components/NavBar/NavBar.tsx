@@ -4,15 +4,18 @@ import { NavLink } from "react-router-dom"
 import { NAVBAR_NAVIGATION } from "utils/navigation/NavBarNavigation"
 import { useDispatch, useSelector } from "react-redux"
 import { selectAuthData } from "redux/auth"
-import { getStatus, getUserProfile } from "redux/profile"
+import { getStatus, getUserProfile, selectCurrentUserProfile } from "redux/profile"
 
 export const NavBar = () => {
   const authData = useSelector(selectAuthData)
   const dispatch = useDispatch()
+  const profile = useSelector(selectCurrentUserProfile)
 
   const handleClickMyProfile = () => {
-    dispatch(getUserProfile(String(authData.id)))
-    dispatch(getStatus(String(authData.id)))
+    if (authData.id !== profile?.userId) {
+      dispatch(getUserProfile(String(authData.id)))
+      dispatch(getStatus(String(authData.id)))
+    }
   }
   return (
     <div className={styles.NavBar}>
@@ -22,7 +25,7 @@ export const NavBar = () => {
             onClick={path !== "/profile" ? () => null : handleClickMyProfile}
             exact
             activeClassName={styles.active}
-            to={path}
+            to={path === "/profile" ? `${path}/${authData.id}` : path}
             key={name}
           >
             <li className={styles.item}>

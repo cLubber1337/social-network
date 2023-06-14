@@ -5,10 +5,9 @@ import { sendMessage } from "redux/dialogs/reducer"
 import { AppStateType } from "redux/store"
 import { compose } from "redux"
 import withAuthRedirect from "hoc/withAuthRedirect"
-import { DialogsType, MessagesType, MyMessagesType } from "redux/dialogs"
+import { MessagesType, MyMessagesType } from "redux/dialogs"
 
 type MapStateToPropsType = {
-  dialogs: DialogsType[]
   messages: MessagesType[]
   myMessages: MyMessagesType[]
   authMe: boolean
@@ -16,7 +15,6 @@ type MapStateToPropsType = {
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
   return {
-    dialogs: state.dialogPage.dialogs,
     messages: state.dialogPage.messages,
     myMessages: state.dialogPage.myMessages,
     authMe: state.authorization.isAuth,

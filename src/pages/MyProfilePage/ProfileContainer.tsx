@@ -36,11 +36,11 @@ class ProfileContainer extends React.Component<PropsType> {
     if (!userID && this.props.authUserId !== null) {
       userID = String(this.props.authUserId)
     }
-    this.props.getStatus(userID)
-    this.props.getUserProfile(userID)
+    if (userID !== String(this.props.authUserId) || this.props.profile === null) {
+      this.props.getStatus(userID)
+      this.props.getUserProfile(userID)
+    }
   }
-
-  componentWillUnmount() {}
 
   render() {
     return <Profile {...this.props} />

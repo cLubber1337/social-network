@@ -30,9 +30,13 @@ const appReducer = (
 }
 // thunks
 export const initialize = (): AppThunk => async (dispatch) => {
-  let promise = dispatch(getAuthUserData())
-  await promise
-  dispatch(initializedSuccess())
+  try {
+    let promise = dispatch(getAuthUserData())
+    await promise
+    dispatch(initializedSuccess())
+  } catch (error) {
+    console.log(error)
+  }
 }
 // actions
 export const initializedSuccess = () => ({ type: "SET_INITIALIZED_SUCCESS" } as const)
